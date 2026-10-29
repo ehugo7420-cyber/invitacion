@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100719">
+
+    <!-- ✏️ Título de la pestaña y vista previa al compartir el link -->
+    <title>Invitación especial | Mis XV años</title>
+    <meta property="og:title" content="Invitación especial | Mis XV años">
+    <meta property="og:description" content="Hay momentos que merecen ser compartidos contigo...">
+    <meta property="og:type" content="website">
+
+    <!-- Ícono de la pestaña: una mariposa (no necesita archivo) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
+
+    <!-- Tipografías de Google Fonts: no necesitas descargar ningún archivo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="estilos.css">
+    <script src="script.js" defer></script>
+</head>
+
+<!--
+=====================================================================
+GUÍA RÁPIDA PARA PERSONALIZAR
+=====================================================================
+1. Busca los textos entre [CORCHETES] y reemplázalos con los datos
+    reales. Cada uno tiene un comentario "✏️ CAMBIAR".
+2. FOTO: guarda la imagen en la carpeta "imagenes/" con el nombre
+    foto-quinceanera.jpg (o cambia el nombre en el <img id="foto">).
+3. MÚSICA: se configura en script.js, en la sección
+    "CONFIGURACIÓN" (arriba del todo).
+4. Archivos que deben estar juntos en la misma carpeta:
+    invitacion.html  +  estilos.css  +  script.js
+    (y opcionalmente las carpetas imagenes/ y audio/)
+=====================================================================
+-->
+
+<body>
+
+    <!-- Fondo nocturno: estrellas y mariposas (las crea script.js) -->
+    <div id="universo" aria-hidden="true"></div>
+
+    <!-- Botón de música: solo aparece si pones una canción en script.js -->
+    <button class="boton-musica" id="botonMusica" type="button" hidden
+            aria-label="Activar o silenciar la música" aria-pressed="false">♫</button>
+
+    <main class="escena">
+
+        <!-- ===================== SOBRE INICIAL ===================== -->
+        <section class="sobre-contenedor" id="contenedorSobre">
+
+            <div class="sobre" id="sobre">
+
+                <!-- Capas del sobre, de atrás hacia adelante:
+                     fondo → carta → frente (bolsillo) → solapa → sello -->
+                <div class="sobre-fondo"></div>
+
+                <!-- Tarjeta que sale del sobre ("inert" = no se puede tocar hasta abrirlo) -->
+                <div class="carta" id="tarjetaInicial" inert>
+                    <div class="ornamento-mini">✧ ❦ ✧</div>
+                    <h2>Una invitación especial</h2>
+                    <p>Hay momentos que merecen ser compartidos contigo...</p>
+                    <button class="boton boton-mini" id="leerInvitacion" type="button">
+                        Leer invitación
+                    </button>
+                </div>
+
+                <div class="sobre-frente"></div>
+                <div class="solapa"></div>
+                <div class="sello">✧</div>
+
+                <!-- Botón invisible que cubre el sobre cerrado -->
+                <button class="abrir-sobre" id="abrirSobre" type="button"
+                        aria-label="Abrir el sobre"></button>
+            </div>
+
+            <p class="instruccion" id="instruccion">Toca el sobre para abrirlo</p>
+        </section>
+
+        <!-- ================== INVITACIÓN COMPLETA ================== -->
+        <article class="invitacion" id="invitacion">
+            <div class="papel" id="papel">
+
+                <!-- Todo lo que está aquí dentro se quema al final -->
+                <div class="contenido-papel">
+
+                    <!-- Adornos de las esquinas -->
+                    <div class="marco-ornamental" aria-hidden="true">
+                        <span class="esquina esquina-tl">❧</span>
+                        <span class="esquina esquina-tr">❧</span>
+                        <span class="esquina esquina-bl">❧</span>
+                        <span class="esquina esquina-br">❧</span>
+                    </div>
+
+                    <div class="etiqueta">Una noche para recordar</div>
+                    <h1 class="titulo-principal">Mis XV años</h1>
+                    <div class="numero-xv">XV</div>
+
+                    <p class="subtitulo">
+                        Hay momentos que se convierten en recuerdos
+                        para toda la vida, y me encantaría compartir
+                        este día tan especial contigo.
+                    </p>
+
+                    <!-- FOTO DE LA QUINCEAÑERA
+                         ✏️ CAMBIAR: la ruta del src si tu foto se llama distinto.
+                         Mientras no exista la foto se muestra el texto de abajo. -->
+                    <figure class="foto-quinceanera" id="marcoFoto">
+                        <img id="foto" src="imagenes/foto-quinceanera.jpg"
+                             alt="Fotografía de la quinceañera">
+                        <figcaption id="textoFoto">
+                            Aquí va la fotografía de la quinceañera
+                        </figcaption>
+                    </figure>
+
+                    <!-- NOMBRE -->
+                    <section class="bloque">
+                        <h2>La festejada</h2>
+                        <!-- ✏️ CAMBIAR: nombre de la quinceañera -->
+                        <p class="dato">[Nombre de la quinceañera]</p>
+                        <p class="nota">Espacio reservado para el nombre.</p>
+                    </section>
+
+                    <div class="separador">✧</div>
+
+                    <!-- PADRES Y PADRINOS -->
+                    <section class="bloque">
+                        <h2>Con la bendición de Dios</h2>
+                        <p class="subencabezado">Mis padres</p>
+                        <!-- ✏️ CAMBIAR: nombres de mamá y papá -->
+                        <p class="dato">[Nombres de mamá y papá]</p>
+                        <p class="subencabezado">Mis padrinos</p>
+                        <!-- ✏️ CAMBIAR: nombres de los padrinos -->
+                        <p class="dato">[Nombres de los padrinos]</p>
+                    </section>
+
+                    <div class="separador">✧</div>
+
+                    <!-- CEREMONIA RELIGIOSA -->
+                    <section class="bloque">
+                        <h2>La ceremonia religiosa</h2>
+                        <!-- ✏️ CAMBIAR: iglesia, dirección, fecha y hora -->
+                        <p class="dato">[Nombre de la iglesia]</p>
+                        <p class="dato">[Dirección de la iglesia]</p>
+                        <p><strong>Fecha:</strong> <span class="dato dato-corto">[Día y fecha]</span></p>
+                        <p><strong>Hora:</strong> <span class="dato dato-corto">[Hora de la misa]</span></p>
+                    </section>
+
+                    <div class="separador">✧</div>
+
+                    <!-- RECEPCIÓN -->
+                    <section class="bloque">
+                        <h2>La recepción</h2>
+                        <!-- ✏️ CAMBIAR: salón, dirección, fecha y hora -->
+                        <p class="dato">[Nombre del salón de eventos]</p>
+                        <p class="dato">[Dirección del salón]</p>
+                        <p><strong>Fecha:</strong> <span class="dato dato-corto">[Día y fecha]</span></p>
+                        <p><strong>Hora:</strong> <span class="dato dato-corto">[Hora de recepción]</span></p>
+                    </section>
+
+                    <div class="separador">✧</div>
+
+                    <!-- HORARIOS -->
+                    <section class="bloque">
+                        <h2>Momentos de la celebración</h2>
+                        <!-- ✏️ CAMBIAR: horas de cada momento -->
+                        <p class="subencabezado">Bienvenida</p>
+                        <p class="dato">[Hora de bienvenida]</p>
+                        <p class="subencabezado">Comida o cena</p>
+                        <p class="dato">[Hora de comida o cena]</p>
+                        <p class="subencabezado">Baile y celebración</p>
+                        <p class="dato">[Hora de inicio del baile]</p>
+                    </section>
+
+                    <div class="separador">✧</div>
+
+                    <!-- REGALOS -->
+                    <section class="bloque">
+                        <h2>Un detalle para mí</h2>
+                        <p>
+                            Tu presencia es el mejor regalo.
+                            Si deseas tener un detalle conmigo,
+                            aquí encontrarás algunas sugerencias.
+                        </p>
+                        <!-- ✏️ CAMBIAR: sugerencias de regalo -->
+                        <p class="regalo">✧ Sobre con efectivo</p>
+                        <p class="regalo">✧ Regalo personal</p>
+                        <p class="regalo">✧ [Otra sugerencia]</p>
+                        <p class="nota">Las sugerencias se pueden personalizar.</p>
+                    </section>
+
+                    <!-- ✏️ CAMBIAR (opcional): frase de la quinceañera -->
+                    <blockquote class="cita">
+                        “Hoy comienza un nuevo capítulo de mi historia,
+                        lleno de sueños por cumplir, caminos por descubrir
+                        y momentos que guardaré para siempre en mi corazón.”
+                    </blockquote>
+
+                    <p class="subtitulo despedida-texto">
+                        Gracias por formar parte de un recuerdo
+                        que llevaré conmigo toda la vida.
+                    </p>
+
+                    <!-- Botón que inicia el quemado del papel -->
+                    <div class="cierre">
+                        <p class="pregunta">¿Me acompañas en este día tan especial?</p>
+                        <button class="boton" id="botonFinal" type="button">
+                            Finalizar invitación ✧
+                        </button>
+                        <!-- ✏️ CAMBIAR: nombre de la quinceañera -->
+                        <p class="nota firma">Con cariño, [Nombre de la quinceañera]</p>
+                    </div>
+
+                    <div class="pie-ornamental">✧ ❦ ✧</div>
+                </div>
+                <!-- FIN DEL CONTENIDO QUE SE QUEMA -->
+
+                <!-- Fuego: las llamas las crea script.js -->
+                <div class="borde-fuego" id="bordeFuego" aria-hidden="true"></div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ===================== MENSAJE FINAL ===================== -->
+    <section class="despedida" id="despedida" aria-live="polite">
+        <div class="resplandor-final" aria-hidden="true"></div>
+        <div class="ornamento-final">✧ ❦ ✧</div>
+
+        <!-- ✏️ CAMBIAR (opcional): mensaje de despedida -->
+        <h2 class="mensaje-final" id="mensajeFinal">¡Te esperamos!</h2>
+        <p class="mensaje-secundario" id="mensajeSecundario">
+            Para compartir juntos una noche inolvidable.
+        </p>
+
+        <div class="ornamento-final">✧</div>
+
+        <button class="boton boton-repetir" id="botonRepetir" type="button">
+            Ver la invitación otra vez
+        </button>
+    </section>
+
+</body>
+</html>

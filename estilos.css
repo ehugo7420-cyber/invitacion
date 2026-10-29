@@ -1,0 +1,842 @@
+/* ==============================================
+   INVITACIÓN XV AÑOS — ESTILOS
+   Paleta: morado, negro, lavanda y dorado
+
+   ÍNDICE
+   0. Colores, tipografías y base
+   1. Fondo estrellado
+   2. Mariposas
+   3. Escena y sobre
+   4. Botones
+   5. Invitación (papel)
+   6. Quemado: fuego, chispas y humo
+   7. Mensaje final
+   8. Celulares y movimiento reducido
+============================================== */
+
+/* ==============================================
+   0. COLORES, TIPOGRAFÍAS Y BASE
+   ✏️ Aquí cambias los colores de toda la invitación.
+============================================== */
+:root {
+    --morado: #9b68e8;
+    --dorado: #c9a45f;
+    --dorado-oscuro: #8a6522;   /* dorado para textos (buen contraste) */
+    --dorado-claro: #f2dfa8;
+
+    --tinta: #3a1d4d;           /* texto principal sobre el papel */
+    --titulo: #5b2a82;          /* títulos morados */
+    --dato: #6b3f86;            /* textos [entre corchetes] */
+    --nota: #7a5a8e;            /* notas pequeñas */
+
+    /* Tipografías (se cargan desde Google Fonts en el HTML) */
+    --fuente-titulos: "Great Vibes", "Brush Script MT", "Segoe Script", cursive;
+    --fuente-texto: "Cormorant Garamond", Georgia, "Palatino Linotype", serif;
+
+    /* Altura de pantalla: dvh evita saltos con la barra del navegador móvil */
+    --alto-pantalla: 100vh;
+}
+
+@supports (height: 100dvh) {
+    :root { --alto-pantalla: 100dvh; }
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: var(--alto-pantalla);
+    overflow-x: hidden;
+
+    background: radial-gradient(ellipse at 50% 40%, #35164f 0%, #180b27 48%, #050409 100%);
+    color: white;
+
+    font-family: var(--fuente-texto);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+button { font: inherit; }
+
+/* ==============================================
+   1. FONDO ESTRELLADO
+============================================== */
+#universo {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.estrella {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff5d5;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #d9b878;
+    animation: titilar var(--duracion, 3s) ease-in-out infinite alternate;
+}
+
+@keyframes titilar {
+    from { opacity: .2; transform: scale(.6); }
+    to   { opacity: 1;  transform: scale(1.5); }
+}
+
+/* ==============================================
+   2. MARIPOSAS
+   El dibujo (SVG) y el vuelo los crea script.js.
+   Aquí solo se define el tamaño y el aleteo.
+============================================== */
+.mariposa-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 48px;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Resplandor suave detrás de cada mariposa (más ligero que un filtro) */
+.mariposa-fondo::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #b878ff44 0%, transparent 65%);
+}
+
+.mariposa-svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.ala-sup, .ala-inf {
+    stroke: #3b1560;
+    stroke-width: .9;
+    stroke-linejoin: round;
+}
+
+.venas {
+    fill: none;
+    stroke: #3b156059;
+    stroke-width: .6;
+    stroke-linecap: round;
+}
+
+.mancha { fill: #ffffffd9; }
+.mancha-dorada { fill: #f2dfa8; }
+
+/* Aleteo: cada par de alas se "cierra" hacia el cuerpo */
+.alas {
+    transform-box: fill-box;
+    animation: aletear var(--aleteo, .3s) ease-in-out infinite alternate;
+    animation-delay: var(--desfase, 0s);
+}
+
+.alas-izq { transform-origin: 100% 50%; }
+.alas-der { transform-origin: 0% 50%; }
+
+@keyframes aletear {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(.2); }
+}
+
+/* ==============================================
+   3. ESCENA Y SOBRE
+   Capas (de atrás hacia adelante):
+   fondo(1) → carta(3) → frente(4) → solapa(6) → sello(7) → botón(10)
+   Por eso la tarjeta sale POR DENTRO del sobre.
+============================================== */
+.escena {
+    position: relative;
+    z-index: 1;
+    min-height: var(--alto-pantalla);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 42px 18px;
+}
+
+.sobre-contenedor {
+    position: relative;
+    width: min(360px, 88vw);
+    height: 255px;
+    margin-top: 150px;          /* espacio para que la tarjeta suba */
+}
+
+.sobre {
+    position: absolute;
+    inset: 0;
+    perspective: 900px;
+    filter: drop-shadow(0 15px 30px #0008);
+}
+
+/* Parte trasera del sobre */
+.sobre-fondo {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: 1px solid #c39be9;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #5a2a84, #2a0e40);
+}
+
+/* Bolsillo delantero (todo menos el triángulo de arriba) */
+.sobre-frente {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    border-radius: 5px;
+    background: linear-gradient(160deg, #7f42b1, #4d1d73);
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Líneas de pliegue del bolsillo */
+.sobre-frente::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top right, transparent calc(50% - 1px), #d9b6ff55, transparent calc(50% + 1px)) 0 0 / 50% 58% no-repeat,
+        linear-gradient(to top left,  transparent calc(50% - 1px), #d9b6ff55, transparent calc(50% + 1px)) 100% 0 / 50% 58% no-repeat;
+}
+
+.solapa {
+    position: absolute;
+    z-index: 6;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65%;
+    background: linear-gradient(160deg, #c18af0, #6c329a);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform .8s ease, z-index 0s .4s;
+}
+
+.sello {
+    position: absolute;
+    z-index: 7;
+    left: 50%;
+    top: 53%;
+    transform: translate(-50%, -50%);
+    width: 61px;
+    height: 61px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #e7ca8a;
+    border-radius: 50%;
+    background: radial-gradient(circle, #9d6bcd, #55236f);
+    box-shadow: 0 0 18px #d6b0ff66;
+    color: #fff0c7;
+    font-size: 27px;
+    transition: opacity .3s;
+}
+
+/* Botón invisible que cubre el sobre cerrado */
+.abrir-sobre {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.abrir-sobre:focus-visible {
+    outline: 2px solid var(--dorado-claro);
+    outline-offset: 8px;
+}
+
+/* Tarjeta que sale del sobre */
+.carta {
+    position: absolute;
+    z-index: 3;
+    left: 5%;
+    top: 10px;
+    width: 90%;
+    min-height: 300px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 9px;
+    background: linear-gradient(145deg, #fffaff, #eee0fb);
+    border: 1px solid var(--dorado);
+    border-radius: 4px;
+    color: var(--tinta);
+    text-align: center;
+    box-shadow: 0 0 20px #0005;
+    transition: transform 1.15s cubic-bezier(.2, .8, .2, 1);
+}
+
+.ornamento-mini {
+    color: var(--dorado-oscuro);
+    font-size: 23px;
+    letter-spacing: 5px;
+}
+
+.carta h2 {
+    margin: 0;
+    color: var(--titulo);
+    font-family: var(--fuente-titulos);
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.15;
+}
+
+.carta p {
+    margin: 0;
+    color: var(--nota);
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.instruccion {
+    position: absolute;
+    bottom: -52px;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    color: #ead8ff;
+    font-size: 20px;
+    font-style: italic;
+    animation: respirar 2s infinite;
+}
+
+@keyframes respirar { 50% { opacity: .55; } }
+
+/* Sobre abierto: la solapa se voltea y queda DETRÁS de la tarjeta */
+.sobre-contenedor.abierto .solapa {
+    transform: rotateX(180deg);
+    z-index: 2;
+}
+
+.sobre-contenedor.abierto .sello { opacity: 0; }
+
+.sobre-contenedor.abierto .carta {
+    transform: translateY(-160px);
+    transition-delay: .55s;     /* primero se abre la solapa, luego sube */
+}
+
+/* El sobre cae al leer la invitación */
+.sobre-contenedor.caido {
+    animation: caerSobre 1s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes caerSobre {
+    to { transform: translateY(110vh) rotate(22deg); opacity: 0; }
+}
+
+/* ==============================================
+   4. BOTONES
+============================================== */
+.boton {
+    display: inline-block;
+    border: 1px solid #d7b978;
+    border-radius: 40px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #7a45a6, #4b226d);
+    color: #fff9ff;
+    font-size: 21px;
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+    box-shadow: 0 6px 18px #58327455;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.boton:hover { transform: translateY(-3px); box-shadow: 0 9px 25px #58327477; }
+.boton:focus-visible { outline: 2px solid var(--morado); outline-offset: 4px; }
+.boton:disabled { opacity: .6; cursor: default; transform: none; }
+
+.boton-mini {
+    padding: 8px 18px;
+    margin-top: 4px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+/* Botón de música (esquina inferior derecha) */
+.boton-musica {
+    position: fixed;
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 40;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--dorado);
+    border-radius: 50%;
+    background: #32104ed9;
+    color: var(--dorado-claro);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.boton-musica.silenciada::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--dorado-claro);
+    transform: rotate(-45deg);
+}
+
+/* ==============================================
+   5. INVITACIÓN (PAPEL)
+============================================== */
+.invitacion {
+    display: none;
+    position: relative;
+    width: min(690px, 100%);
+    margin: 0 auto;
+}
+
+.invitacion.visible {
+    display: block;
+    animation: aparecer .9s ease both;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(35px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.papel {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(32px, 7vw, 62px);
+    border: 2px solid var(--dorado);
+    border-radius: 3px;
+    color: var(--tinta);
+    background:
+        radial-gradient(circle at 0 0, #d9bd82 0 3px, transparent 4px),
+        radial-gradient(circle at 100% 0, #d9bd82 0 3px, transparent 4px),
+        radial-gradient(circle at 0 100%, #d9bd82 0 3px, transparent 4px),
+        radial-gradient(circle at 100% 100%, #d9bd82 0 3px, transparent 4px),
+        radial-gradient(ellipse at top, #ffffff 0%, transparent 55%),
+        linear-gradient(135deg, #fffaff, #f3e7fc 55%, #e7d4f4);
+    background-size: 18px 18px, 18px 18px, 18px 18px, 18px 18px, 100% 100%, 100% 100%;
+    background-position: top left, top right, bottom left, bottom right, center, center;
+    background-repeat: no-repeat;
+    box-shadow: 0 22px 70px #0009, inset 0 0 0 7px #fff8, inset 0 0 0 9px #d9bc7d;
+}
+
+.papel::before {
+    content: "✧ ❦ ✧";
+    display: block;
+    margin-bottom: 28px;
+    text-align: center;
+    color: var(--dorado-oscuro);
+    font-size: 31px;
+    letter-spacing: 8px;
+}
+
+.marco-ornamental { pointer-events: none; }
+
+.esquina {
+    position: absolute;
+    color: var(--dorado-oscuro);
+    font-size: 34px;
+    line-height: 1;
+}
+
+.esquina-tl { top: 15px;    left: 17px; }
+.esquina-tr { top: 15px;    right: 17px; transform: scaleX(-1); }
+.esquina-bl { bottom: 15px; left: 17px;  transform: scaleY(-1); }
+.esquina-br { bottom: 15px; right: 17px; transform: scale(-1); }
+
+.etiqueta {
+    margin-bottom: 10px;
+    color: var(--nota);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.titulo-principal {
+    margin: 6px 0;
+    color: var(--titulo);
+    font-family: var(--fuente-titulos);
+    font-size: clamp(54px, 12vw, 88px);
+    font-weight: normal;
+    line-height: 1.1;
+    text-align: center;
+    text-shadow: 1px 1px 0 #fff, 0 0 15px #d7b9e9;
+}
+
+.numero-xv {
+    margin: 4px 0 12px;
+    color: #9a7330;
+    font-family: var(--fuente-titulos);
+    font-size: clamp(80px, 18vw, 130px);
+    line-height: 1;
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 21px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* Foto */
+.foto-quinceanera {
+    position: relative;
+    width: min(240px, 80%);
+    aspect-ratio: 3 / 4;
+    margin: 28px auto 36px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #c7a1e0;
+    border-radius: 120px 120px 8px 8px;
+    outline: 5px solid white;
+    background: linear-gradient(145deg, #e7d5f6, #c6a1e5);
+    box-shadow: 0 0 0 6px #e2c68e, 0 10px 25px #47215a22;
+    color: var(--titulo);
+    font-size: 20px;
+    text-align: center;
+}
+
+.foto-quinceanera img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+.foto-quinceanera.con-foto img { opacity: 1; }
+.foto-quinceanera.con-foto figcaption { display: none; }
+
+/* Secciones de información */
+.bloque {
+    margin: 27px 0;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.bloque h2 {
+    margin: 0 0 12px;
+    color: var(--titulo);
+    font-family: var(--fuente-titulos);
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 1.2;
+    text-shadow: 0 1px 0 white;
+}
+
+.bloque p { margin: 6px 0; font-size: 20px; }
+.bloque strong { color: var(--titulo); }
+
+.subencabezado {
+    margin-top: 17px !important;
+    color: var(--titulo);
+    font-size: 22px !important;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.dato {
+    display: block;
+    width: min(100%, 460px);
+    margin: 4px auto;
+    padding: 2px 8px;
+    border-bottom: 1px dashed #a98bc0;
+    color: var(--dato);
+}
+
+.dato-corto { display: inline; width: auto; }
+
+.nota {
+    color: var(--nota);
+    font-size: 16px !important;
+}
+
+.regalo { color: var(--titulo); }
+
+/* Separadores */
+.separador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 75%;
+    margin: 28px auto;
+    color: var(--dorado-oscuro);
+    font-size: 19px;
+}
+
+.separador::before,
+.separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a45f);
+}
+
+.separador::after { background: linear-gradient(90deg, #c9a45f, transparent); }
+
+/* Frase y cierre */
+.cita {
+    margin: 30px 0;
+    padding: 25px 20px;
+    border-top: 1px solid #c8a45e;
+    border-bottom: 1px solid #c8a45e;
+    background: #ffffff55;
+    box-shadow: inset 0 0 18px #d9bc7d18;
+    color: var(--titulo);
+    font-size: 24px;
+    font-style: italic;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.despedida-texto { margin: 24px 0; }
+
+.cierre { padding-top: 15px; text-align: center; }
+.pregunta { font-size: 24px; line-height: 1.5; }
+.firma { margin-top: 20px; }
+
+.pie-ornamental {
+    margin-top: 30px;
+    color: var(--dorado-oscuro);
+    font-size: 26px;
+    letter-spacing: 7px;
+    text-align: center;
+}
+
+/* ==============================================
+   6. QUEMADO DEL PAPEL
+   script.js va moviendo la variable --quemado de 0 a 1.
+   Con ella se recorta el papel (de abajo hacia arriba)
+   y sube el fuego, siempre sincronizados.
+============================================== */
+.papel.quemando {
+    clip-path: inset(0 0 calc(var(--quemado, 0) * 100%) 0);
+    pointer-events: none;
+}
+
+/* Versión sin movimiento: el papel solo se desvanece */
+.papel.desvaneciendo {
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
+
+.borde-fuego {
+    position: absolute;
+    z-index: 20;
+    left: -3%;
+    width: 106%;
+    height: 110px;
+    bottom: calc(var(--quemado, 0) * 100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.papel.quemando .borde-fuego { opacity: 1; }
+
+/* Borde chamuscado del papel, justo encima del fuego */
+.borde-fuego::before {
+    content: "";
+    position: absolute;
+    left: 3%;
+    right: 3%;
+    bottom: 0;
+    height: 20px;
+    background: linear-gradient(to top, #2a0e04f2, #8c3c10bf 45%, transparent);
+}
+
+/* Fuego dibujado (SVG) con tres capas: naranja, naranja claro y amarillo.
+   script.js crea las lenguas de fuego y aquí solo se define su parpadeo. */
+.fuego-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.lengua {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: parpadeo var(--duracion-llama, .5s) ease-in-out infinite alternate;
+}
+
+@keyframes parpadeo {
+    from { transform: scale(1, .86) skewX(-4deg); }
+    to   { transform: scale(1.05, 1.1) skewX(4deg); }
+}
+
+.chispa {
+    position: fixed;
+    z-index: 30;
+    width: var(--tamano, 5px);
+    height: var(--tamano, 5px);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fffbd0 0%, #ffbc52 45%, #ff5722 75%, transparent 100%);
+    box-shadow: 0 0 9px #ff762b;
+    pointer-events: none;
+    animation: volarChispa var(--duracion, 1s) ease-out forwards;
+}
+
+@keyframes volarChispa {
+    from { opacity: 1; transform: translate(0, 0) scale(1); }
+    to   { opacity: 0; transform: translate(var(--dx, 20px), var(--dy, -80px)) scale(.1); }
+}
+
+.humo {
+    position: fixed;
+    z-index: 29;
+    width: var(--humo, 35px);
+    height: var(--humo, 35px);
+    border-radius: 50%;
+    background: radial-gradient(circle, #a99bab55 0%, #74677930 45%, transparent 75%);
+    filter: blur(6px);
+    pointer-events: none;
+    animation: subirHumo var(--duracion, 2s) ease-out forwards;
+}
+
+@keyframes subirHumo {
+    from { opacity: .5; transform: translate(0, 0) scale(.6); }
+    to   { opacity: 0;  transform: translate(var(--dx, 15px), -100px) scale(2.5); }
+}
+
+/* ==============================================
+   7. MENSAJE FINAL
+============================================== */
+.despedida {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    overflow: hidden;
+    background: radial-gradient(ellipse, #35164f, #08040e 75%);
+    text-align: center;
+}
+
+.despedida.visible {
+    display: flex;
+    animation: aparecerFinal 1.5s ease both;
+}
+
+@keyframes aparecerFinal { from { opacity: 0; } to { opacity: 1; } }
+
+.resplandor-final {
+    position: absolute;
+    width: min(80vw, 550px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, #a75ae833 0%, #6d36a522 40%, transparent 70%);
+    filter: blur(10px);
+    animation: respirarLuz 4s ease-in-out infinite alternate;
+}
+
+@keyframes respirarLuz {
+    from { transform: scale(.8);  opacity: .4; }
+    to   { transform: scale(1.15); opacity: 1; }
+}
+
+.ornamento-final {
+    position: relative;
+    z-index: 1;
+    margin: 15px;
+    color: #e7c77f;
+    font-size: 28px;
+    letter-spacing: 8px;
+}
+
+.mensaje-final {
+    position: relative;
+    z-index: 1;
+    margin: 10px 0;
+    color: #f5e4ff;
+    font-family: var(--fuente-titulos);
+    font-size: clamp(54px, 13vw, 100px);
+    font-weight: normal;
+    line-height: 1.1;
+    text-shadow: 0 0 12px #d2a4ff, 0 0 30px #9d55e8;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.mensaje-secundario {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    margin: 6px 0;
+    color: #e9d6f8;
+    font-size: clamp(20px, 4.5vw, 25px);
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.boton-repetir {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+}
+
+.mensaje-final.visible { animation: revelarMensaje 2s ease forwards; }
+.mensaje-secundario.visible { animation: revelarMensaje 1.8s ease forwards .7s; }
+.boton-repetir.visible { animation: revelarMensaje 1.5s ease forwards 2s; }
+
+@keyframes revelarMensaje {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================================
+   8. CELULARES Y MOVIMIENTO REDUCIDO
+============================================== */
+@media (max-width: 480px) {
+    body { font-size: 18px; }
+
+    .escena { padding: 32px 18px; }
+
+    .sobre-contenedor { height: 220px; margin-top: 140px; }
+    .carta { min-height: 268px; }
+    .carta h2 { font-size: 28px; }
+    .carta p { font-size: 17px; }
+    .sobre-contenedor.abierto .carta { transform: translateY(-146px); }
+
+    .papel { padding: 32px 22px; }
+    .bloque h2 { font-size: 34px; }
+    .bloque p { font-size: 19px; }
+    .esquina { font-size: 27px; }
+}
+
+/* Para quien tiene activado "reducir movimiento" en su celular o PC */
+@media (prefers-reduced-motion: reduce) {
+    .estrella,
+    .alas,
+    .lengua,
+    .resplandor-final,
+    .instruccion { animation: none; }
+
+    html { scroll-behavior: auto; }
+}
