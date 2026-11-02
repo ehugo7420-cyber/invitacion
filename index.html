@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#211329">
   <title>Una invitación especial | Mis XV años</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -16,12 +18,16 @@
     <div id="estrellas" aria-hidden="true"></div>
     <div id="mariposas" aria-hidden="true"></div>
 
-    <button id="botonMusica" class="boton-musica" type="button" aria-label="Activar música" title="Activar o silenciar música">
-      <span class="icono-musica">♫</span><span id="textoMusica">Música</span>
+    <button id="botonMusica" class="boton-musica" type="button"
+      aria-label="Activar música" title="Activar o silenciar música">
+      <span class="icono-musica">♫</span>
+      <span id="textoMusica">Música</span>
     </button>
+
     <audio id="musica" loop preload="none">
-      <!-- Coloca tu archivo de audio en recursos/musica.mp3 y descomenta la línea siguiente. -->
-      <!-- <source src="recursos/musica.mp3" type="audio/mpeg"> -->
+      <!-- Coloca tu archivo en recursos/musica.mp3 y descomenta:
+      <source src="recursos/musica.mp3" type="audio/mpeg">
+      -->
     </audio>
 
     <section id="escenaInicio" class="escena-inicio" aria-label="Sobre de invitación">
@@ -33,20 +39,26 @@
 
       <div id="contenedorSobre" class="contenedor-sobre">
         <div class="sobre-sombra"></div>
+
         <div id="sobre" class="sobre">
           <div class="sobre-parte sobre-atras"></div>
+
           <div class="sobre-carta" aria-hidden="true">
             <span class="carta-mini-titulo">Una noche para recordar</span>
             <span class="carta-mini-nombre">Mis XV</span>
             <span class="carta-mini-adornado">✧</span>
           </div>
+
           <div class="sobre-parte sobre-frente"></div>
           <div class="sobre-solapa"></div>
           <div class="sello">XV</div>
         </div>
       </div>
 
-      <button id="botonAbrir" class="boton-principal" type="button">Abrir invitación <span>✧</span></button>
+      <button id="botonAbrir" class="boton-principal" type="button">
+        Abrir invitación <span>✧</span>
+      </button>
+
       <p class="nota-inicio">Toca el botón para comenzar</p>
     </section>
 
@@ -60,134 +72,238 @@
       <div class="escenario-hojas">
         <div id="destellosCambio" class="destellos-cambio" aria-hidden="true"></div>
 
+        <!-- HOJA 1: FOTOGRAFÍA Y NOMBRE -->
         <article class="hoja activa" data-page="0">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
-            <span class="esquina esquina-bl">❧</span><span class="esquina esquina-br">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-bl">❧</span>
+            <span class="esquina esquina-br">❧</span>
+
             <p class="sobrelinea">Con mucha ilusión te invito a celebrar</p>
+
             <div class="marco-foto">
-              <img src="imagenes/foto-quinceanera.jpg" alt="Fotografía de la quinceañera" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-              <div class="foto-placeholder"><span>Tu fotografía aquí</span><small>Reemplaza foto-quinceanera.jpg</small></div>
+              <img src="imagenes/foto-quinceanera.jpg"
+                alt="Fotografía de la quinceañera"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+
+              <div class="foto-placeholder">
+                <span>Tu fotografía aquí</span>
+                <small>Reemplaza foto-quinceanera.jpg</small>
+              </div>
             </div>
+
             <h2 class="nombre-script">Nombre de la quinceañera</h2>
-            <p class="texto-hoja">Acompáñame a vivir una noche llena de alegría, sueños y momentos inolvidables.</p>
+
+            <p class="texto-hoja">
+              Acompáñame a vivir una noche llena de alegría,
+              sueños y momentos inolvidables.
+            </p>
+
             <div class="adorno-centro">✧ ❦ ✧</div>
           </div>
         </article>
 
+        <!-- HOJA 2: PADRES Y PADRINOS -->
         <article class="hoja" data-page="1">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+
             <span class="numero-romano">II</span>
             <p class="sobrelinea">Este día tan especial</p>
             <h2 class="titulo-hoja">Con la bendición de</h2>
+
             <div class="bloque-nombres">
               <span class="etiqueta">Mis padres</span>
               <p>Nombre de mamá</p>
               <span class="y">&</span>
               <p>Nombre de papá</p>
             </div>
+
             <div class="separador">✧ ❦ ✧</div>
+
             <div class="bloque-nombres">
               <span class="etiqueta">Mis padrinos</span>
               <p>Nombre de padrino</p>
               <span class="y">&</span>
               <p>Nombre de madrina</p>
             </div>
-            <p class="texto-hoja pequeno">Gracias por acompañarme y ser parte de mi historia.</p>
+
+            <p class="texto-hoja pequeno">
+              Gracias por acompañarme y ser parte de mi historia.
+            </p>
           </div>
         </article>
 
+        <!-- HOJA 3: MISA Y RECEPCIÓN -->
         <article class="hoja" data-page="2">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+
             <span class="numero-romano">III</span>
             <p class="sobrelinea">Nos encantará compartir contigo</p>
             <h2 class="titulo-hoja">Nuestra celebración</h2>
+
             <div class="evento">
               <span class="icono-evento">✧</span>
               <h3>Ceremonia religiosa</h3>
               <p>Parroquia de ejemplo</p>
               <small>6:00 de la tarde</small>
             </div>
+
             <div class="separador">✧ ❦ ✧</div>
+
             <div class="evento">
               <span class="icono-evento">✧</span>
               <h3>Recepción</h3>
               <p>Salón de eventos de ejemplo</p>
               <small>8:00 de la noche</small>
             </div>
-            <div class="fecha-destacada">Sábado · 15 de agosto · 2027</div>
+
+            <div class="fecha-destacada">
+              Sábado · 15 de agosto · 2027
+            </div>
           </div>
         </article>
 
+        <!-- HOJA 4: PROGRAMA -->
         <article class="hoja" data-page="3">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+
             <span class="numero-romano">IV</span>
             <p class="sobrelinea">Una noche llena de alegría</p>
             <h2 class="titulo-hoja">Momentos especiales</h2>
+
             <div class="timeline">
-              <div class="momento"><span>6:00 PM</span><p>Bienvenida y ceremonia</p></div>
-              <div class="momento"><span>8:00 PM</span><p>Recepción de invitados</p></div>
-              <div class="momento"><span>8:30 PM</span><p>Cena y convivencia</p></div>
-              <div class="momento"><span>9:30 PM</span><p>Vals de XV años</p></div>
-              <div class="momento"><span>10:00 PM</span><p>¡Que comience el baile!</p></div>
+              <div class="momento">
+                <span>6:00 PM</span>
+                <p>Bienvenida y ceremonia</p>
+              </div>
+
+              <div class="momento">
+                <span>8:00 PM</span>
+                <p>Recepción de invitados</p>
+              </div>
+
+              <div class="momento">
+                <span>8:30 PM</span>
+                <p>Cena y convivencia</p>
+              </div>
+
+              <div class="momento">
+                <span>9:30 PM</span>
+                <p>Vals de XV años</p>
+              </div>
+
+              <div class="momento">
+                <span>10:00 PM</span>
+                <p>¡Que comience el baile!</p>
+              </div>
             </div>
-            <p class="texto-hoja pequeno">Los horarios son de demostración y podrán modificarse.</p>
+
+            <p class="texto-hoja pequeno">
+              Los horarios son de demostración y podrán modificarse.
+            </p>
           </div>
         </article>
 
+        <!-- HOJA 5: REGALOS Y FRASE -->
         <article class="hoja" data-page="4">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+
             <span class="numero-romano">V</span>
             <p class="sobrelinea">Un pequeño detalle</p>
             <h2 class="titulo-hoja">Sugerencias y deseos</h2>
+
             <div class="regalo-icono">✧</div>
             <h3 class="subtitulo-hoja">Lluvia de sobres</h3>
-            <p class="texto-hoja">Tu presencia es mi mejor regalo. Si deseas obsequiarme algo, un sobre con cariño será bien recibido.</p>
+
+            <p class="texto-hoja">
+              Tu presencia es mi mejor regalo. Si deseas obsequiarme
+              algo, un sobre con cariño será bien recibido.
+            </p>
+
             <div class="separador">✧ ❦ ✧</div>
-            <p class="frase">“Que nunca te falten sueños por cumplir ni motivos para sonreír.”</p>
+
+            <p class="frase">
+              “Que nunca te falten sueños por cumplir ni motivos para sonreír.”
+            </p>
+
             <p class="firma-frase">Con cariño</p>
           </div>
         </article>
 
+        <!-- HOJA 6: DESPEDIDA -->
         <article class="hoja" data-page="5">
           <div class="marco-hoja">
-            <span class="esquina esquina-tl">❧</span><span class="esquina esquina-tr">❧</span>
+            <span class="esquina esquina-tl">❧</span>
+            <span class="esquina esquina-tr">❧</span>
+
             <span class="numero-romano">VI</span>
             <div class="adorno-final">✧</div>
+
             <p class="sobrelinea">El mejor regalo será tu compañía</p>
             <h2 class="titulo-hoja titulo-despedida">¡Te espero!</h2>
-            <p class="nombre-script nombre-final">Nombre de la quinceañera</p>
-            <p class="texto-hoja">Gracias por formar parte de este capítulo tan especial de mi vida.</p>
+
+            <p class="nombre-script nombre-final">
+              Nombre de la quinceañera
+            </p>
+
+            <p class="texto-hoja">
+              Gracias por formar parte de este capítulo tan especial de mi vida.
+            </p>
+
             <div class="adorno-centro">❦ ✧ ❦</div>
+
             <p class="fecha-destacada">Mis XV años · 2027</p>
-            <p class="texto-hoja pequeno">Será una alegría celebrar contigo.</p>
+
+            <p class="texto-hoja pequeno">
+              Será una alegría celebrar contigo.
+            </p>
           </div>
         </article>
       </div>
 
       <div class="controles-paginas">
-        <button id="botonAnterior" class="boton-secundario" type="button" disabled>← Anterior</button>
+        <button id="botonAnterior" class="boton-secundario"
+          type="button" disabled>
+          ← Anterior
+        </button>
+
         <div class="progreso" aria-label="Progreso de la invitación">
           <div id="puntosProgreso" class="puntos-progreso"></div>
           <span id="contadorPagina">1 de 6</span>
         </div>
-        <button id="botonSiguiente" class="boton-principal" type="button">Siguiente ✧</button>
+
+        <button id="botonSiguiente" class="boton-principal" type="button">
+          Siguiente ✧
+        </button>
       </div>
-      <p class="ayuda-paginas">También puedes tocar la hoja para continuar</p>
+
+      <p class="ayuda-paginas">
+        También puedes tocar la hoja para continuar
+      </p>
     </section>
 
+    <!-- PANTALLA FINAL -->
     <section id="pantallaFinal" class="pantalla-final oculto">
       <div class="destello-final">✧</div>
       <p>Una noche, mil recuerdos...</p>
       <h2>¡Te esperamos!</h2>
       <span>Gracias por acompañarnos</span>
-      <button id="botonRepetir" class="boton-principal" type="button">Volver a ver la invitación ↻</button>
+
+      <button id="botonRepetir" class="boton-principal" type="button">
+        Volver a ver la invitación ↻
+      </button>
     </section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
