@@ -1,427 +1,457 @@
 /* =========================================================
-   INVITACIÓN XV AÑOS - JAVASCRIPT
-   Navegación por seis hojas y animaciones.
-   ========================================================= */
+INVITACIÓN XV AÑOS - JAVASCRIPT DOCUMENTADO
+Controla las animaciones y la navegación de las seis hojas.
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Elementos principales
-  const escenaInicio = document.getElementById("escenaInicio");
-  const contenedorSobre = document.getElementById("contenedorSobre");
-  const botonAbrir = document.getElementById("botonAbrir");
+// -------------------------------------------------------
+// 1. ELEMENTOS PRINCIPALES DEL HTML
+// -------------------------------------------------------
 
-  const experiencia = document.getElementById("experiencia");
-  const hojas = [...document.querySelectorAll(".hoja")];
+const escenaInicio = document.getElementById("escenaInicio");
+const contenedorSobre = document.getElementById("contenedorSobre");
+const botonAbrir = document.getElementById("botonAbrir");
 
-  const botonAnterior = document.getElementById("botonAnterior");
-  const botonSiguiente = document.getElementById("botonSiguiente");
+const experiencia = document.getElementById("experiencia");
+const hojas = [...document.querySelectorAll(".hoja")];
 
-  const contadorPagina = document.getElementById("contadorPagina");
-  const puntosProgreso = document.getElementById("puntosProgreso");
+const botonAnterior = document.getElementById("botonAnterior");
+const botonSiguiente = document.getElementById("botonSiguiente");
 
-  const destellosCambio = document.getElementById("destellosCambio");
+const contadorPagina = document.getElementById("contadorPagina");
+const puntosProgreso = document.getElementById("puntosProgreso");
 
-  const pantallaFinal = document.getElementById("pantallaFinal");
-  const botonRepetir = document.getElementById("botonRepetir");
+const destellosCambio = document.getElementById("destellosCambio");
 
-  const botonMusica = document.getElementById("botonMusica");
-  const textoMusica = document.getElementById("textoMusica");
-  const musica = document.getElementById("musica");
+const pantallaFinal = document.getElementById("pantallaFinal");
+const botonRepetir = document.getElementById("botonRepetir");
 
-  let paginaActual = 0;
-  let cambiando = false;
+// Variables que indican la página actual y si hay una animación activa.
+let paginaActual = 0;
+let cambiando = false;
 
-  // -------------------------------------------------------
-  // ESTRELLAS DEL FONDO
-  // -------------------------------------------------------
 
-  const contenedorEstrellas = document.getElementById("estrellas");
+// -------------------------------------------------------
+// 2. ESTRELLAS DEL FONDO
+// Se crean estrellas en posiciones aleatorias.
+// -------------------------------------------------------
 
-  for (let i = 0; i < 85; i++) {
+const contenedorEstrellas = document.getElementById("estrellas");
+
+for (let i = 0; i < 85; i++) {
+
+const estrella = document.createElement("span");
+
+estrella.className = "estrella";
+
+estrella.style.left = `${Math.random() * 100}%`;
+estrella.style.top = `${Math.random() * 100}%`;
+
+estrella.style.setProperty(
+    "--duracion",
+    `${2 + Math.random() * 4}s`
+);
+
+estrella.style.animationDelay =
+    `${Math.random() * 4}s`;
+
+// Algunas estrellas tendrán un tamaño mayor.
+if (Math.random() > .75) {
+    estrella.style.width = "3px";
+    estrella.style.height = "3px";
+}
+
+contenedorEstrellas.appendChild(estrella);
+}
+
+
+// -------------------------------------------------------
+// 3. MARIPOSAS ANIMADAS
+// Se crea un dibujo SVG para cada mariposa.
+// -------------------------------------------------------
+
+const contenedorMariposas = document.getElementById("mariposas");
+
+const dibujoMariposa = `
+<svg viewBox="0 0 40 32" aria-hidden="true">
+    <path d="M20 15 C8 -2 0 3 5 15 C9 24 16 21 20 17 C24 21 31 24 35 15 C40 3 32 -2 20 15Z"/>
+    <path d="M20 15 C14 20 13 29 19 29 C22 27 21 21 20 15Z"/>
+</svg>
+`;
+
+for (let i = 0; i < 5; i++) {
+
+const mariposa = document.createElement("div");
+
+mariposa.className = "mariposa";
+mariposa.innerHTML = dibujoMariposa;
+
+mariposa.style.left =
+    `${8 + Math.random() * 84}%`;
+
+mariposa.style.top =
+    `${12 + Math.random() * 76}%`;
+
+mariposa.style.setProperty(
+    "--vuelo",
+    `${7 + Math.random() * 7}s`
+);
+
+mariposa.style.animationDelay =
+    `${Math.random() * -8}s`;
+
+contenedorMariposas.appendChild(mariposa);
+}
+
+
+// -------------------------------------------------------
+// 4. INDICADORES DE LAS SEIS PÁGINAS
+// Se crea un punto por cada hoja de la invitación.
+// -------------------------------------------------------
+
+hojas.forEach((_, indice) => {
+
+const punto = document.createElement("span");
+
+punto.className = "punto";
+punto.setAttribute("aria-hidden", "true");
+
+if (indice === 0) {
+    punto.classList.add("activo");
+}
+
+puntosProgreso.appendChild(punto);
+});
+
+
+// -------------------------------------------------------
+// 5. ACTUALIZAR BOTONES Y PROGRESO
+// Actualiza el número de página y los puntos.
+// -------------------------------------------------------
+
+function actualizarControles() {
+
+botonAnterior.disabled =
+    paginaActual === 0 || cambiando;
+
+botonSiguiente.disabled = cambiando;
+
+// En la última hoja, el botón cambia su texto.
+botonSiguiente.textContent =
+    paginaActual === hojas.length - 1
+    ? "Finalizar ✧"
+    : "Siguiente ✧";
+
+contadorPagina.textContent =
+    `${paginaActual + 1} de ${hojas.length}`;
+
+// Resalta el punto de la hoja actual.
+[...puntosProgreso.children].forEach((punto, i) => {
+
+    punto.classList.toggle(
+    "activo",
+    i === paginaActual
+    );
+
+});
+}
+
+
+// -------------------------------------------------------
+// 6. DESTELLOS ENTRE LAS HOJAS
+// Genera pequeñas partículas cuando cambia la página.
+// -------------------------------------------------------
+
+function crearDestellos() {
+
+destellosCambio.innerHTML = "";
+
+const rect = destellosCambio.getBoundingClientRect();
+
+for (let i = 0; i < 22; i++) {
+
+    const particula = document.createElement("span");
+
+    particula.className = "particula";
+
+    particula.style.left =
+    `${25 + Math.random() * 50}%`;
+
+    particula.style.top =
+    `${25 + Math.random() * 50}%`;
+
+    particula.style.setProperty(
+    "--dx",
+    `${(Math.random() - .5) * rect.width * .7}px`
+    );
+
+    particula.style.setProperty(
+    "--dy",
+    `${(Math.random() - .5) * rect.height * .65}px`
+    );
+
+    particula.style.animationDelay =
+    `${Math.random() * .18}s`;
+
+    destellosCambio.appendChild(particula);
+}
+
+// Elimina las partículas después de la animación.
+window.setTimeout(() => {
+
+    destellosCambio.innerHTML = "";
+
+}, 1000);
+}
+
+
+// -------------------------------------------------------
+// 7. ABRIR EL SOBRE
+// Primero se abre el sobre y después aparece la primera hoja.
+// -------------------------------------------------------
+
+function abrirInvitacion() {
+
+// Evita que el botón se presione varias veces.
+if (botonAbrir.disabled) return;
+
+botonAbrir.disabled = true;
+
+// Se abre la solapa del sobre.
+contenedorSobre.classList.add("abierto");
+
+// El sobre comienza a desaparecer.
+window.setTimeout(() => {
+
+    contenedorSobre.classList.add("saliendo");
+
+}, 950);
+
+// Se oculta la portada y aparece la invitación.
+window.setTimeout(() => {
+
+    escenaInicio.classList.add("oculto");
+
+    experiencia.classList.remove("oculto");
+
+    hojas[0].classList.add("entrando");
+
+    actualizarControles();
+
+}, 1550);
+}
+
+
+// -------------------------------------------------------
+// 8. CAMBIAR DE PÁGINA
+// Permite avanzar y retroceder entre las seis hojas.
+// -------------------------------------------------------
+
+function cambiarPagina(direccion) {
+
+// No permite cambiar de página mientras hay una animación.
+if (cambiando) return;
+
+const nuevaPagina = paginaActual + direccion;
+
+// Si se intenta avanzar después de la última hoja,
+// se muestra la pantalla final.
+if (nuevaPagina >= hojas.length) {
+
+    finalizarInvitacion();
+
+    return;
+}
+
+// No permite retroceder antes de la primera hoja.
+if (nuevaPagina < 0) return;
+
+cambiando = true;
+
+const hojaAnterior = hojas[paginaActual];
+const hojaNueva = hojas[nuevaPagina];
+
+// Aparecen partículas decorativas.
+crearDestellos();
+
+// La hoja actual comienza a desaparecer.
+hojaAnterior.classList.remove("activa", "entrando");
+hojaAnterior.classList.add("saliendo");
+
+// La siguiente hoja comienza a aparecer.
+hojaNueva.classList.add("activa", "entrando");
+
+// Actualiza el número de página.
+paginaActual = nuevaPagina;
+
+actualizarControles();
+
+// Espera a que termine la transición.
+window.setTimeout(() => {
+
+    hojaAnterior.classList.remove("saliendo");
+    hojaNueva.classList.remove("entrando");
+
+    cambiando = false;
+
+    actualizarControles();
+
+}, 820);
+}
+
+
+// -------------------------------------------------------
+// 9. MOSTRAR LA DESPEDIDA
+// Se ejecuta al terminar de recorrer las seis hojas.
+// -------------------------------------------------------
+
+function finalizarInvitacion() {
+
+experiencia.classList.add("oculto");
+
+pantallaFinal.classList.remove("oculto");
+
+lanzarDestellosFinales();
+}
+
+
+// -------------------------------------------------------
+// 10. DESTELLOS DE LA PANTALLA FINAL
+// -------------------------------------------------------
+
+function lanzarDestellosFinales() {
+
+for (let i = 0; i < 18; i++) {
+
     const estrella = document.createElement("span");
 
     estrella.className = "estrella";
 
-    estrella.style.left = `${Math.random() * 100}%`;
-    estrella.style.top = `${Math.random() * 100}%`;
+    estrella.style.left =
+    `${Math.random() * 100}%`;
+
+    estrella.style.top =
+    `${Math.random() * 100}%`;
 
     estrella.style.setProperty(
-      "--duracion",
-      `${2 + Math.random() * 4}s`
+    "--duracion",
+    `${1.5 + Math.random() * 2}s`
     );
 
-    estrella.style.animationDelay = `${Math.random() * 4}s`;
+    pantallaFinal.appendChild(estrella);
 
-    if (Math.random() > .75) {
-      estrella.style.width = "3px";
-      estrella.style.height = "3px";
-    }
+    // Elimina cada estrella después de cinco segundos.
+    window.setTimeout(() => {
 
-    contenedorEstrellas.appendChild(estrella);
-  }
+    estrella.remove();
 
-  // -------------------------------------------------------
-  // MARIPOSAS ANIMADAS
-  // -------------------------------------------------------
+    }, 5000);
+}
+}
 
-  const contenedorMariposas = document.getElementById("mariposas");
 
-  const dibujoMariposa = `
-    <svg viewBox="0 0 40 32" aria-hidden="true">
-      <path d="M20 15 C8 -2 0 3 5 15 C9 24 16 21 20 17 C24 21 31 24 35 15 C40 3 32 -2 20 15Z"/>
-      <path d="M20 15 C14 20 13 29 19 29 C22 27 21 21 20 15Z"/>
-    </svg>
-  `;
+// -------------------------------------------------------
+// 11. REINICIAR LA INVITACIÓN
+// Permite volver a la portada y comenzar nuevamente.
+// -------------------------------------------------------
 
-  for (let i = 0; i < 5; i++) {
-    const mariposa = document.createElement("div");
+function reiniciar() {
 
-    mariposa.className = "mariposa";
-    mariposa.innerHTML = dibujoMariposa;
+paginaActual = 0;
+cambiando = false;
 
-    mariposa.style.left = `${8 + Math.random() * 84}%`;
-    mariposa.style.top = `${12 + Math.random() * 76}%`;
+pantallaFinal.classList.add("oculto");
+experiencia.classList.add("oculto");
 
-    mariposa.style.setProperty(
-      "--vuelo",
-      `${7 + Math.random() * 7}s`
+// Restablece el estado de todas las hojas.
+hojas.forEach((hoja, i) => {
+
+    hoja.classList.remove(
+    "activa",
+    "saliendo",
+    "entrando"
     );
 
-    mariposa.style.animationDelay = `${Math.random() * -8}s`;
-
-    contenedorMariposas.appendChild(mariposa);
-  }
-
-  // -------------------------------------------------------
-  // INDICADORES DE LAS PÁGINAS
-  // -------------------------------------------------------
-
-  hojas.forEach((_, indice) => {
-    const punto = document.createElement("span");
-
-    punto.className = "punto";
-    punto.setAttribute("aria-hidden", "true");
-
-    if (indice === 0) {
-      punto.classList.add("activo");
+    // La primera hoja queda preparada para mostrarse.
+    if (i === 0) {
+    hoja.classList.add("activa");
     }
+});
 
-    puntosProgreso.appendChild(punto);
-  });
+// Cierra y restablece el sobre.
+contenedorSobre.classList.remove(
+    "abierto",
+    "saliendo"
+);
 
-  // -------------------------------------------------------
-  // ACTUALIZAR BOTONES Y PROGRESO
-  // -------------------------------------------------------
+botonAbrir.disabled = false;
 
-  function actualizarControles() {
+// Regresa a la portada.
+escenaInicio.classList.remove("oculto");
 
-    botonAnterior.disabled =
-      paginaActual === 0 || cambiando;
+actualizarControles();
 
-    botonSiguiente.disabled = cambiando;
+// Desplaza la página hacia arriba.
+window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+});
+}
 
-    botonSiguiente.textContent =
-      paginaActual === hojas.length - 1
-        ? "Finalizar ✧"
-        : "Siguiente ✧";
 
-    contadorPagina.textContent =
-      `${paginaActual + 1} de ${hojas.length}`;
+// -------------------------------------------------------
+// 12. EVENTOS DE LOS BOTONES
+// Relaciona los botones del HTML con sus funciones.
+// -------------------------------------------------------
 
-    [...puntosProgreso.children].forEach((punto, i) => {
-      punto.classList.toggle(
-        "activo",
-        i === paginaActual
-      );
-    });
-  }
+// Botón para abrir el sobre.
+botonAbrir.addEventListener(
+"click",
+abrirInvitacion
+);
 
-  // -------------------------------------------------------
-  // GENERAR DESTELLOS ENTRE LAS HOJAS
-  // -------------------------------------------------------
+// Botón para avanzar.
+botonSiguiente.addEventListener(
+"click",
+() => cambiarPagina(1)
+);
 
-  function crearDestellos() {
+// Botón para retroceder.
+botonAnterior.addEventListener(
+"click",
+() => cambiarPagina(-1)
+);
 
-    destellosCambio.innerHTML = "";
+// Botón para volver a comenzar.
+botonRepetir.addEventListener(
+"click",
+reiniciar
+);
 
-    const rect = destellosCambio.getBoundingClientRect();
 
-    for (let i = 0; i < 22; i++) {
+// -------------------------------------------------------
+// 13. AVANZAR TOCANDO LA HOJA
+// También permite pasar de página tocando el papel.
+// -------------------------------------------------------
 
-      const particula = document.createElement("span");
+hojas.forEach((hoja) => {
 
-      particula.className = "particula";
+hoja.addEventListener("click", (evento) => {
 
-      particula.style.left = `${25 + Math.random() * 50}%`;
-      particula.style.top = `${25 + Math.random() * 50}%`;
+    // No cambia de página si se presiona un botón o enlace.
+    if (evento.target.closest("button, a")) return;
 
-      particula.style.setProperty(
-        "--dx",
-        `${(Math.random() - .5) * rect.width * .7}px`
-      );
+    cambiarPagina(1);
+});
+});
 
-      particula.style.setProperty(
-        "--dy",
-        `${(Math.random() - .5) * rect.height * .65}px`
-      );
 
-      particula.style.animationDelay =
-        `${Math.random() * .18}s`;
+// -------------------------------------------------------
+// 14. ESTADO INICIAL
+// Actualiza los botones al cargar la invitación.
+// -------------------------------------------------------
 
-      destellosCambio.appendChild(particula);
-    }
-
-    window.setTimeout(() => {
-      destellosCambio.innerHTML = "";
-    }, 1000);
-  }
-
-  // -------------------------------------------------------
-  // ABRIR EL SOBRE
-  // -------------------------------------------------------
-
-  function abrirInvitacion() {
-
-    if (botonAbrir.disabled) return;
-
-    botonAbrir.disabled = true;
-
-    // Se abre la solapa y sale la carta.
-    contenedorSobre.classList.add("abierto");
-
-    // El sobre cae después de abrirse.
-    window.setTimeout(() => {
-      contenedorSobre.classList.add("saliendo");
-    }, 950);
-
-    // Aparece la primera hoja.
-    window.setTimeout(() => {
-
-      escenaInicio.classList.add("oculto");
-
-      experiencia.classList.remove("oculto");
-
-      hojas[0].classList.add("entrando");
-
-      actualizarControles();
-
-    }, 1550);
-  }
-
-  // -------------------------------------------------------
-  // CAMBIAR DE PÁGINA
-  // -------------------------------------------------------
-
-  function cambiarPagina(direccion) {
-
-    if (cambiando) return;
-
-    const nuevaPagina = paginaActual + direccion;
-
-    // Si se termina la última hoja, mostrar despedida.
-    if (nuevaPagina >= hojas.length) {
-      finalizarInvitacion();
-      return;
-    }
-
-    if (nuevaPagina < 0) return;
-
-    cambiando = true;
-
-    const hojaAnterior = hojas[paginaActual];
-    const hojaNueva = hojas[nuevaPagina];
-
-    // Efecto de partículas.
-    crearDestellos();
-
-    // La hoja actual cae.
-    hojaAnterior.classList.remove("activa", "entrando");
-    hojaAnterior.classList.add("saliendo");
-
-    // La siguiente hoja aparece.
-    hojaNueva.classList.add("activa", "entrando");
-
-    paginaActual = nuevaPagina;
-
-    actualizarControles();
-
-    // Esperar a que termine la animación.
-    window.setTimeout(() => {
-
-      hojaAnterior.classList.remove("saliendo");
-      hojaNueva.classList.remove("entrando");
-
-      cambiando = false;
-
-      actualizarControles();
-
-    }, 820);
-  }
-
-  // -------------------------------------------------------
-  // MOSTRAR LA DESPEDIDA
-  // -------------------------------------------------------
-
-  function finalizarInvitacion() {
-
-    experiencia.classList.add("oculto");
-
-    pantallaFinal.classList.remove("oculto");
-
-    lanzarDestellosFinales();
-  }
-
-  function lanzarDestellosFinales() {
-
-    for (let i = 0; i < 18; i++) {
-
-      const estrella = document.createElement("span");
-
-      estrella.className = "estrella";
-
-      estrella.style.left = `${Math.random() * 100}%`;
-      estrella.style.top = `${Math.random() * 100}%`;
-
-      estrella.style.setProperty(
-        "--duracion",
-        `${1.5 + Math.random() * 2}s`
-      );
-
-      pantallaFinal.appendChild(estrella);
-
-      window.setTimeout(() => {
-        estrella.remove();
-      }, 5000);
-    }
-  }
-
-  // -------------------------------------------------------
-  // REINICIAR LA INVITACIÓN
-  // -------------------------------------------------------
-
-  function reiniciar() {
-
-    paginaActual = 0;
-    cambiando = false;
-
-    pantallaFinal.classList.add("oculto");
-    experiencia.classList.add("oculto");
-
-    hojas.forEach((hoja, i) => {
-
-      hoja.classList.remove(
-        "activa",
-        "saliendo",
-        "entrando"
-      );
-
-      if (i === 0) {
-        hoja.classList.add("activa");
-      }
-    });
-
-    contenedorSobre.classList.remove(
-      "abierto",
-      "saliendo"
-    );
-
-    botonAbrir.disabled = false;
-
-    escenaInicio.classList.remove("oculto");
-
-    actualizarControles();
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
-
-  // -------------------------------------------------------
-  // EVENTOS DE LOS BOTONES
-  // -------------------------------------------------------
-
-  botonAbrir.addEventListener(
-    "click",
-    abrirInvitacion
-  );
-
-  botonSiguiente.addEventListener(
-    "click",
-    () => cambiarPagina(1)
-  );
-
-  botonAnterior.addEventListener(
-    "click",
-    () => cambiarPagina(-1)
-  );
-
-  botonRepetir.addEventListener(
-    "click",
-    reiniciar
-  );
-
-  // También se puede avanzar tocando la hoja.
-  hojas.forEach((hoja) => {
-
-    hoja.addEventListener("click", (evento) => {
-
-      if (evento.target.closest("button, a")) return;
-
-      cambiarPagina(1);
-    });
-  });
-
-  // -------------------------------------------------------
-  // CONTROL DE MÚSICA
-  // -------------------------------------------------------
-
-  botonMusica.addEventListener("click", async () => {
-
-    // Si todavía no se agregó una canción.
-    if (!musica.querySelector("source")) {
-
-      textoMusica.textContent = "Añade música";
-
-      window.setTimeout(() => {
-        textoMusica.textContent = "Música";
-      }, 1800);
-
-      return;
-    }
-
-    try {
-
-      if (musica.paused) {
-
-        await musica.play();
-
-        textoMusica.textContent = "Silenciar";
-
-        botonMusica.setAttribute(
-          "aria-label",
-          "Silenciar música"
-        );
-
-      } else {
-
-        musica.pause();
-
-        textoMusica.textContent = "Música";
-
-        botonMusica.setAttribute(
-          "aria-label",
-          "Activar música"
-        );
-      }
-
-    } catch (error) {
-
-      textoMusica.textContent = "No disponible";
-    }
-  });
-
-  // Estado inicial.
-  actualizarControles();
+actualizarControles();
 
 });
