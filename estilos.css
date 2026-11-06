@@ -1,1460 +1,2767 @@
 /* =========================================================
+
 INVITACIÓN XV AÑOS
+
 DISEÑO: VERDE SALVIA, MARFIL Y DORADO
+
 Este archivo controla los colores, tamaños y animaciones.
+
 ========================================================= */
 
+
+
 /* ---------------------------------------------------------
+
 1. COLORES GENERALES
+
 --------------------------------------------------------- */
 
+
+
 :root {
+
 --verde-noche: #17231f;
+
 --verde-oscuro: #344b42;
+
 --verde-medio: #789184;
+
 --verde-claro: #d8e2d9;
+
 --dorado: #c9b47e;
+
 --marfil: #fffaf1;
+
 --tinta: #34443b;
+
 --sombra: 0 24px 70px rgba(0,0,0,.42);
+
 }
+
+
 
 /* Ajustes generales para todos los elementos */
 
+
+
 * {
+
 box-sizing: border-box;
+
 }
+
+
 
 html,
-body {
-margin: 0;
-min-height: 100%;
-}
 
 body {
-min-height: 100vh;
-overflow-x: hidden;
-overflow-y: auto;
-background: var(--verde-noche);
-color: var(--marfil);
-font-family: 'Montserrat', sans-serif;
+
+margin: 0;
+
+min-height: 100%;
+
 }
+
+
+
+body {
+
+min-height: 100vh;
+
+overflow-x: hidden;
+
+overflow-y: auto;
+
+background: var(--verde-noche);
+
+color: var(--marfil);
+
+font-family: 'Montserrat', sans-serif;
+
+}
+
+
 
 button {
+
 font: inherit;
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 2. FONDO PRINCIPAL
+
 --------------------------------------------------------- */
 
+
+
 #universo {
+
 position: relative;
+
 min-height: 100svh;
+
 width: 100%;
+
 display: grid;
+
 place-items: center;
+
 padding: 34px 18px;
+
 isolation: isolate;
+
 overflow: hidden;
 
+
+
 background:
+
 radial-gradient(
+
 ellipse at 50% 45%,
+
 rgba(120,145,132,.28),
+
 transparent 55%
+
 ),
+
 radial-gradient(
+
 ellipse at 15% 15%,
+
 rgba(170,190,174,.15),
+
 transparent 35%
+
 ),
+
 linear-gradient(
+
 145deg,
+
 #111b17,
+
 #263b33 55%,
+
 #17231f
+
 );
+
 }
+
+
 
 /* Luz ambiental que se mueve suavemente */
 
+
+
 .fondo-luz {
+
 position: absolute;
+
 inset: -20%;
+
 z-index: -1;
+
 pointer-events: none;
+
+
 
 background:
+
 radial-gradient(
+
 circle,
+
 rgba(205,190,145,.10),
+
 transparent 48%
+
 );
+
+
 
 animation: luzRespira 8s ease-in-out infinite alternate;
+
 }
+
+
 
 @keyframes luzRespira {
+
 from {
+
 transform: scale(.85);
+
 opacity: .45;
+
 }
+
+
 
 to {
+
 transform: scale(1.15);
+
 opacity: .9;
-}
+
 }
 
+}
+
+
+
 /* ---------------------------------------------------------
+
 3. ESTRELLAS DEL FONDO
+
 --------------------------------------------------------- */
+
+
 
 #estrellas,
+
 #mariposas {
+
 position: absolute;
+
 inset: 0;
+
 pointer-events: none;
+
 overflow: hidden;
+
 z-index: -1;
+
 }
+
+
 
 .estrella {
+
 position: absolute;
+
 width: 2px;
+
 height: 2px;
+
 border-radius: 50%;
+
 background: #fff4dc;
+
 box-shadow: 0 0 8px 2px rgba(255,238,207,.5);
 
+
+
 animation:
+
 titilar var(--duracion)
+
 ease-in-out infinite alternate;
+
 }
+
+
 
 @keyframes titilar {
+
 from {
+
 opacity: .15;
+
 transform: scale(.7);
+
 }
+
+
 
 to {
+
 opacity: 1;
+
 transform: scale(1.5);
-}
+
 }
 
+}
+
+
+
 /* ---------------------------------------------------------
+
 4. MARIPOSAS ANIMADAS
+
 --------------------------------------------------------- */
+
+
 
 .mariposa {
+
 position: absolute;
+
 width: 34px;
+
 height: 27px;
+
 opacity: .5;
 
+
+
 filter:
+
 drop-shadow(
+
 0 0 7px rgba(223,192,145,.45)
+
 );
 
+
+
 animation:
+
 volar var(--vuelo)
+
 ease-in-out infinite alternate;
+
 }
+
+
 
 .mariposa svg {
+
 width: 100%;
+
 height: 100%;
+
 overflow: visible;
+
 }
+
+
 
 .mariposa path {
+
 fill: rgba(184,205,188,.78);
+
 stroke: rgba(245,238,215,.8);
+
 stroke-width: .8;
+
 transform-origin: 50% 50%;
 
+
+
 animation:
+
 aleteo .7s ease-in-out infinite alternate;
+
 }
+
+
 
 @keyframes aleteo {
+
 from {
+
 transform: scaleX(1);
+
 }
 
+
+
 to {
+
 transform: scaleX(.35);
+
 }
+
 }
+
+
 
 @keyframes volar {
+
 from {
+
 transform: translate3d(0,0,0) rotate(-8deg);
+
 }
+
+
 
 to {
+
 transform: translate3d(34px,-52px,0) rotate(12deg);
+
 }
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 5. PORTADA
+
 --------------------------------------------------------- */
 
+
+
 .escena-inicio {
+
 width: min(100%,600px);
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 text-align: center;
+
 gap: 17px;
 
+
+
 transition:
+
 opacity .7s,
+
 transform .7s;
+
 }
+
+
 
 .intro-texto p,
+
 .encabezado-experiencia p {
+
 margin: 0;
+
 color: #d6e2d8;
+
 letter-spacing: .25em;
+
 text-transform: uppercase;
+
 font-size: .68rem;
+
 }
 
+
+
 .intro-texto h1 {
+
 margin: 7px 0;
 
+
+
 font:
+
 400 clamp(2.7rem,8vw,4.6rem)
+
 'Great Vibes',
+
 cursive;
+
+
 
 color: #f5f3e9;
 
+
+
 text-shadow:
+
 0 0 22px rgba(224,205,155,.24);
+
 }
+
+
 
 .intro-texto span {
+
 font-size: .78rem;
+
 color: #c9d6cb;
+
 letter-spacing: .06em;
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 6. SOBRE DE LA INVITACIÓN
+
 --------------------------------------------------------- */
 
+
+
 .contenedor-sobre {
+
 position: relative;
+
 width: min(82vw,360px);
+
 height: 230px;
+
 margin: 22px 0 5px;
+
 perspective: 1000px;
+
 }
+
+
 
 .sobre-sombra {
+
 position: absolute;
+
 bottom: -19px;
+
 left: 10%;
+
 width: 80%;
+
 height: 25px;
+
 background: #050308;
+
 filter: blur(15px);
+
 border-radius: 50%;
+
 }
+
+
 
 .sobre {
+
 position: absolute;
+
 inset: 0;
+
 transform-style: preserve-3d;
+
 }
+
+
 
 .sobre-parte {
+
 position: absolute;
+
 inset: 0;
+
 border: 1px solid rgba(220,197,145,.5);
+
 border-radius: 5px;
+
 }
+
+
 
 .sobre-atras {
+
 background:
+
 linear-gradient(
+
 145deg,
+
 #718b7c,
+
 #344b42
+
 );
 
+
+
 box-shadow: var(--sombra);
+
 }
+
+
 
 /* Carta que sobresale del sobre */
 
+
+
 .sobre-carta {
+
 position: absolute;
+
 left: 8%;
+
 right: 8%;
+
 bottom: 13px;
+
 height: 190px;
 
+
+
 background:
+
 linear-gradient(
+
 145deg,
+
 #fffaf1,
+
 #e1e9df
+
 );
+
+
 
 color: #42584a;
 
+
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 justify-content: center;
+
 gap: 9px;
 
+
+
 border: 1px solid #c9bd9c;
+
 box-shadow: 0 5px 15px #10081766;
 
+
+
 transition:
+
 transform 1s cubic-bezier(.2,.75,.25,1),
+
 opacity .8s;
 
+
+
 z-index: 1;
+
 }
+
+
 
 .carta-mini-titulo {
+
 font-size: .58rem;
+
 letter-spacing: .16em;
+
 text-transform: uppercase;
+
 }
+
+
 
 .carta-mini-nombre {
+
 font: 2.8rem 'Great Vibes',cursive;
+
 }
 
+
+
 .carta-mini-adornado {
+
 color: #9b895e;
+
 }
+
+
 
 /* Parte frontal del sobre */
 
+
+
 .sobre-frente {
+
 clip-path:
+
 polygon(
+
 0 100%,
+
 0 0,
+
 50% 57%,
+
 100% 0,
+
 100% 100%
+
 );
+
+
 
 background:
+
 linear-gradient(
+
 145deg,
+
 #718b7c,
+
 #3f5a4b
+
 );
 
+
+
 z-index: 3;
+
 }
+
+
 
 /* Solapa superior */
 
+
+
 .sobre-solapa {
+
 position: absolute;
+
 inset: 0;
 
+
+
 clip-path:
+
 polygon(
+
 0 0,
+
 100% 0,
+
 50% 58%
+
 );
+
+
 
 background:
+
 linear-gradient(
+
 160deg,
+
 #8ca394,
+
 #506c5a
+
 );
 
+
+
 z-index: 4;
+
 transform-origin: top;
 
+
+
 transition: transform .8s ease;
+
 backface-visibility: hidden;
+
 }
+
+
 
 /* Sello decorativo del sobre */
 
+
+
 .sello {
+
 position: absolute;
+
 z-index: 6;
+
 left: 50%;
+
 top: 51%;
+
+
 
 transform: translate(-50%,-50%);
 
+
+
 width: 49px;
+
 height: 49px;
+
 border-radius: 50%;
 
+
+
 display: grid;
+
 place-items: center;
 
+
+
 background:
+
 radial-gradient(
+
 circle at 35% 30%,
+
 #d6c39a,
+
 #617d6c 68%
+
 );
 
+
+
 border: 2px solid #d8c79f;
+
 box-shadow: 0 3px 12px #160d1d88;
 
+
+
 color: #fff2fb;
+
 font-family: 'Cormorant Garamond',serif;
+
 font-size: 1.35rem;
 
+
+
 transition:
+
 opacity .35s,
+
 transform .35s;
+
 }
+
+
 
 /* Animación de apertura */
 
+
+
 .contenedor-sobre.abierto .sobre-solapa {
+
 transform: rotateX(180deg);
+
 z-index: 0;
+
 }
+
+
 
 .contenedor-sobre.abierto .sello {
+
 opacity: 0;
+
 transform: translate(-50%,-50%) scale(.5);
+
 }
 
+
+
 .contenedor-sobre.abierto .sobre-carta {
+
 transform: translateY(-125px);
+
 }
+
+
 
 /* El sobre desaparece hacia abajo */
 
+
+
 .contenedor-sobre.saliendo {
+
 animation: sobreCae .85s forwards ease-in;
+
 }
+
+
 
 @keyframes sobreCae {
+
 to {
+
 transform: translateY(130vh) rotate(16deg);
+
 opacity: 0;
+
 }
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 7. BOTONES
+
 --------------------------------------------------------- */
 
+
+
 .boton-principal,
+
 .boton-secundario {
+
 border: 1px solid #d8c79f;
+
 border-radius: 30px;
+
 padding: 12px 22px;
+
 cursor: pointer;
 
+
+
 transition:
+
 transform .25s,
+
 background .25s,
+
 box-shadow .25s;
+
 }
+
+
 
 .boton-principal {
+
 background:
+
 linear-gradient(
+
 135deg,
+
 #789184,
+
 #526c5b
+
 );
 
+
+
 color: #fff8ff;
+
 box-shadow: 0 8px 24px #08050d55;
+
 letter-spacing: .04em;
+
 }
+
+
 
 .boton-secundario {
+
 background: rgba(255,250,241,.08);
+
 color: #f5f1e6;
+
 }
+
+
 
 .boton-principal:hover,
+
 .boton-secundario:hover {
+
 transform: translateY(-2px);
+
 box-shadow: 0 10px 26px #08050d66;
+
 }
+
+
 
 .boton-principal:disabled,
+
 .boton-secundario:disabled {
+
 opacity: .45;
+
 cursor: not-allowed;
+
 transform: none;
+
 }
+
+
 
 .boton-principal span {
+
 margin-left: 7px;
+
 }
 
+
+
 .nota-inicio {
+
 color: #aab7aa;
+
 font-size: .68rem;
+
 margin: 0;
+
 letter-spacing: .08em;
+
 }
+
+
 
 /* Clase utilizada para ocultar secciones */
 
+
+
 .oculto {
+
 display: none !important;
+
 }
 
+
+
 /* ---------------------------------------------------------
-8. EXPERIENCIA DE LAS SEIS HOJAS
+
+8. EXPERIENCIA DE LAS CINCO HOJAS
+
 --------------------------------------------------------- */
+
+
 
 .experiencia {
+
 width: min(100%,650px);
 
+
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 gap: 16px;
 
+
+
 animation: aparecer .8s ease both;
+
 }
+
+
 
 @keyframes aparecer {
+
 from {
+
 opacity: 0;
+
 transform: translateY(18px);
+
 }
+
+
 
 to {
+
 opacity: 1;
+
 transform: translateY(0);
+
 }
+
 }
+
+
 
 .encabezado-experiencia {
+
 display: flex;
+
 align-items: center;
+
 gap: 12px;
+
 text-align: center;
+
 }
+
+
 
 .linea-adorno {
+
 width: 35px;
+
 height: 1px;
 
+
+
 background:
+
 linear-gradient(
+
 90deg,
+
 transparent,
+
 #bda66e
+
 );
+
 }
+
+
 
 .linea-adorno:last-child {
+
 transform: rotate(180deg);
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 9. ESCENARIO DE LAS HOJAS
+
 --------------------------------------------------------- */
 
+
+
 .escenario-hojas {
+
 position: relative;
+
 width: min(100%,410px);
+
 height: clamp(440px,66svh,540px);
 
+
+
 display: grid;
+
 place-items: center;
 
+
+
 perspective: 1200px;
+
 }
+
+
 
 /* Todas las hojas se colocan en el mismo espacio */
 
+
+
 .hoja {
+
 position: absolute;
+
 inset: 0;
 
+
+
 opacity: 0;
+
 visibility: hidden;
 
+
+
 transform:
+
 translateY(-12px)
+
 scale(.97);
 
+
+
 pointer-events: none;
+
 }
+
+
 
 /* Hoja que se encuentra visible */
 
+
+
 .hoja.activa {
+
 opacity: 1;
+
 visibility: visible;
 
+
+
 transform:
+
 translateY(0)
+
 scale(1);
 
+
+
 pointer-events: auto;
+
 z-index: 2;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 10. DISEÑO DEL PAPEL
+
 --------------------------------------------------------- */
 
+
+
 .marco-hoja {
+
 position: relative;
+
 width: 100%;
+
 height: 100%;
+
+
 
 padding: 35px 34px 30px;
 
+
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 justify-content: center;
 
+
+
 text-align: center;
+
 overflow: hidden;
+
+
 
 color: var(--tinta);
 
+
+
 background:
+
 radial-gradient(
+
 circle at 50% 0%,
+
 #fff 0,
+
 #fffaf3 48%,
+
 #f0eee3 100%
+
 );
+
+
 
 border: 1px solid #d0c4a3;
 
+
+
 box-shadow:
+
 var(--sombra),
+
 inset 0 0 0 7px rgba(255,255,255,.55),
+
 inset 0 0 0 8px #d5c9a8;
 
+
+
 border-radius: 4px;
+
 }
+
+
 
 /* Marco interior dorado */
 
+
+
 .marco-hoja::before {
+
 content: "";
+
 position: absolute;
+
 inset: 15px;
+
 border: 1px solid rgba(143,125,82,.45);
+
 pointer-events: none;
+
 }
+
+
 
 /* Adornos de las esquinas */
 
+
+
 .esquina {
+
 position: absolute;
+
 color: #a18b5e;
+
 font: 2.1rem 'Cormorant Garamond',serif;
+
 line-height: 1;
+
 z-index: 1;
+
 }
+
+
 
 .esquina-tl {
+
 top: 17px;
+
 left: 19px;
+
 }
+
+
 
 .esquina-tr {
+
 top: 17px;
+
 right: 19px;
+
 transform: scaleX(-1);
+
 }
+
+
 
 .esquina-bl {
+
 bottom: 17px;
+
 left: 19px;
+
 transform: rotate(180deg);
+
 }
 
+
+
 .esquina-br {
+
 bottom: 17px;
+
 right: 19px;
+
 transform: rotate(180deg) scaleX(-1);
+
 }
+
+
 
 /* Texto pequeño que aparece arriba de los títulos */
 
+
+
 .sobrelinea {
+
 color: #718879;
+
 text-transform: uppercase;
+
 letter-spacing: .19em;
+
 font-size: .58rem;
+
 line-height: 1.5;
+
 margin: 0 0 12px;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 11. FOTOGRAFÍA
+
 --------------------------------------------------------- */
 
+
+
 .marco-foto {
+
 position: relative;
 
+
+
 width: clamp(125px,34vw,165px);
+
 height: clamp(145px,39vw,185px);
+
+
 
 padding: 6px;
 
+
+
 background: #fff;
+
 border: 1px solid #c6b88f;
+
+
 
 box-shadow: 0 5px 18px #4a345322;
 
+
+
 margin: 2px 0 12px;
+
 }
 
+
+
 .marco-foto img {
+
 width: 100%;
+
 height: 100%;
+
 object-fit: cover;
+
 display: block;
+
 }
+
+
 
 /* Mensaje alternativo si no se encuentra la fotografía */
 
+
+
 .foto-placeholder {
+
 display: none;
+
 position: absolute;
+
 inset: 6px;
 
+
+
 place-content: center;
+
 gap: 8px;
 
+
+
 background:
+
 linear-gradient(
+
 145deg,
+
 #e8e9df,
+
 #fdf8f2
+
 );
 
+
+
 color: #5b7461;
+
 font: 1.4rem 'Cormorant Garamond',serif;
+
 }
+
+
 
 .foto-placeholder small {
+
 font: .55rem 'Montserrat',sans-serif;
+
 color: #8c947f;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 12. TEXTOS DE LAS HOJAS
+
 --------------------------------------------------------- */
+
+
 
 .nombre-script {
+
 font:
+
 clamp(2.1rem,7vw,3.1rem)
+
 'Great Vibes',
+
 cursive;
 
+
+
 color: #536f5e;
+
 margin: 0 0 8px;
+
 line-height: 1.2;
+
 }
+
+
 
 .texto-hoja {
+
 max-width: 290px;
 
+
+
 font:
+
 .78rem/1.7
+
 'Cormorant Garamond',
+
 serif;
+
+
 
 color: #58665a;
+
 margin: 6px auto;
+
 }
+
+
 
 .texto-hoja.pequeno {
+
 font: .65rem/1.5 'Montserrat',sans-serif;
+
 color: #858b7f;
+
 margin-top: 14px;
+
 }
+
+
 
 .adorno-centro,
+
 .separador {
+
 color: #9a895f;
+
 letter-spacing: .3em;
+
 font-size: 1rem;
+
 margin: 8px 0;
+
 }
+
+
 
 .numero-romano {
+
 position: absolute;
+
 top: 28px;
 
+
+
 color: #9a895f;
 
+
+
 font:
+
 italic 1rem
+
 'Cormorant Garamond',
+
 serif;
 
+
+
 letter-spacing: .2em;
+
 }
+
+
 
 .titulo-hoja {
+
 font:
+
 500 clamp(1.8rem,6vw,2.35rem)
+
 'Cormorant Garamond',
+
 serif;
 
+
+
 color: #536c5b;
+
 margin: 0 0 15px;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 13. PADRES Y PADRINOS
+
 --------------------------------------------------------- */
+
+
 
 .bloque-nombres {
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 gap: 3px;
+
 margin: 4px 0;
+
 }
+
+
 
 .etiqueta {
+
 font-size: .58rem;
+
 letter-spacing: .2em;
+
 text-transform: uppercase;
+
 color: #8a947c;
+
 margin-bottom: 5px;
+
 }
+
+
 
 .bloque-nombres p {
+
 font: 1.2rem 'Cormorant Garamond',serif;
+
 color: #4e5e50;
+
 margin: 0;
+
 }
+
+
 
 .y {
+
 color: #a18b5e;
+
 font: italic 1rem 'Cormorant Garamond',serif;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 14. CEREMONIA Y RECEPCIÓN
+
 --------------------------------------------------------- */
+
+
 
 .evento {
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 gap: 4px;
+
 margin: 5px 0;
+
 }
+
+
 
 .icono-evento {
+
 color: #a18b5e;
+
 font-size: 1.3rem;
+
 }
+
+
 
 .evento h3 {
+
 color: #536c5b;
+
 font: 600 1.35rem 'Cormorant Garamond',serif;
+
 margin: 0;
+
 }
+
+
 
 .evento p {
+
 color: #4e5e50;
+
 font: 1rem 'Cormorant Garamond',serif;
+
 margin: 2px 0;
+
 }
+
+
 
 .evento small {
+
 color: #788174;
+
 font: .59rem/1.5 'Montserrat',sans-serif;
+
 }
+
+
 
 .fecha-destacada {
+
 color: #927c4d;
+
 font: 1rem 'Cormorant Garamond',serif;
+
 letter-spacing: .08em;
+
 margin: 10px 0 0;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 15. PROGRAMA DE ACTIVIDADES
+
 --------------------------------------------------------- */
+
+
 
 .timeline {
+
 width: 100%;
+
 max-width: 285px;
+
 position: relative;
+
 margin: 5px auto;
+
 padding-left: 8px;
+
 }
+
+
 
 .timeline::before {
+
 content: "";
+
 position: absolute;
+
 top: 8px;
+
 bottom: 8px;
+
 left: 54px;
+
 width: 1px;
+
 background: #c8b98d;
+
 }
+
+
 
 .momento {
+
 position: relative;
+
 display: grid;
+
 grid-template-columns: 48px 1fr;
+
 align-items: center;
+
 gap: 20px;
+
 margin: 13px 0;
+
 text-align: left;
+
 }
+
+
 
 .momento::before {
+
 content: "";
+
 position: absolute;
+
 left: 42px;
+
 width: 9px;
+
 height: 9px;
+
 border-radius: 50%;
+
 background: #829b88;
+
 border: 2px solid #e7ddc4;
+
 z-index: 1;
+
 }
+
+
 
 .momento span {
+
 color: #8a7951;
+
 font: .68rem 'Montserrat',sans-serif;
+
 text-align: right;
+
 }
+
+
 
 .momento p {
+
 color: #536357;
+
 font: .9rem 'Cormorant Garamond',serif;
+
 margin: 0;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 16. SUGERENCIAS Y FRASE
+
 --------------------------------------------------------- */
+
+
 
 .regalo-icono {
+
 color: #a18b5e;
+
 font-size: 2rem;
+
 margin: 4px 0;
+
 }
+
+
 
 .subtitulo-hoja {
+
 color: #536c5b;
+
 font: 1.25rem 'Cormorant Garamond',serif;
+
 margin: 0 0 8px;
+
 }
+
+
 
 .frase {
+
 max-width: 280px;
+
 color: #536c5b;
+
 font: italic 1.15rem/1.5 'Cormorant Garamond',serif;
+
 margin: 12px auto;
+
 }
+
+
 
 .firma-frase {
+
 color: #9a895f;
+
 font: 1rem 'Great Vibes',cursive;
+
 margin: 4px 0;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 17. DESPEDIDA
+
 --------------------------------------------------------- */
+
+
 
 .adorno-final {
+
 color: #a18b5e;
+
 font-size: 2.5rem;
+
 margin-bottom: 10px;
+
 animation: brilloFinal 2s ease-in-out infinite alternate;
+
 }
+
+
 
 .titulo-despedida {
+
 max-width: 290px;
+
 }
+
+
 
 .nombre-final {
+
 margin: 8px 0;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 18. CONTROLES Y PROGRESO
+
 --------------------------------------------------------- */
+
+
 
 .controles-paginas {
+
 width: min(100%,410px);
 
+
+
 display: flex;
+
 align-items: center;
+
 justify-content: space-between;
+
 gap: 10px;
+
 }
+
+
 
 .controles-paginas button {
+
 padding: 10px 15px;
+
 font-size: .72rem;
+
 }
+
+
 
 .progreso {
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 gap: 7px;
+
 }
+
+
 
 .puntos-progreso {
+
 display: flex;
+
 gap: 6px;
+
 }
+
+
 
 .punto {
+
 width: 7px;
+
 height: 7px;
+
 border-radius: 50%;
+
 background: rgba(226,216,190,.35);
+
 border: 1px solid #b9a77a;
+
 transition: background .3s, transform .3s;
+
 }
+
+
 
 .punto.activo {
+
 background: #d9c58f;
+
 transform: scale(1.35);
+
 }
+
+
 
 .progreso span {
+
 color: #d7dfd3;
+
 font-size: .62rem;
+
 letter-spacing: .08em;
+
 }
+
+
 
 .ayuda-paginas {
+
 color: #aab7aa;
+
 font-size: .62rem;
+
 margin: 0;
+
 letter-spacing: .04em;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 19. ANIMACIONES AL CAMBIAR DE HOJA
+
 --------------------------------------------------------- */
+
+
 
 .hoja.saliendo {
+
 animation: hojaSale .65s ease forwards;
+
 }
+
+
 
 .hoja.entrando {
+
 animation: hojaEntra .75s ease both;
+
 }
+
+
 
 @keyframes hojaSale {
+
 to {
+
 opacity: 0;
+
 transform:
+
 translateY(25px)
+
 rotateX(-8deg)
+
 scale(.94);
+
 }
+
 }
+
+
 
 @keyframes hojaEntra {
+
 from {
+
 opacity: 0;
+
 transform:
+
 translateY(-20px)
+
 rotateX(8deg)
+
 scale(.94);
+
 }
+
+
 
 to {
+
 opacity: 1;
+
 transform:
+
 translateY(0)
+
 rotateX(0)
+
 scale(1);
-}
+
 }
 
+}
+
+
+
 /* ---------------------------------------------------------
+
 20. DESTELLOS ENTRE LAS PÁGINAS
+
 --------------------------------------------------------- */
+
+
 
 .destellos-cambio {
+
 position: absolute;
+
 inset: 0;
+
 z-index: 5;
+
 pointer-events: none;
+
 overflow: hidden;
+
 }
+
+
 
 .particula {
+
 position: absolute;
+
 width: 5px;
+
 height: 5px;
+
 border-radius: 50%;
 
+
+
 background: #e5d3a0;
+
 box-shadow: 0 0 10px #e5d3a0;
 
+
+
 animation: destelloParticula .8s ease-out forwards;
+
 }
+
+
 
 @keyframes destelloParticula {
+
 from {
+
 opacity: 1;
+
 transform: translate(0,0) scale(1);
+
 }
+
+
 
 to {
+
 opacity: 0;
+
 transform:
+
 translate(var(--dx),var(--dy))
+
 scale(.1);
+
 }
+
 }
+
+
 
 /* ---------------------------------------------------------
+
 21. PANTALLA FINAL
+
 --------------------------------------------------------- */
 
+
+
 .pantalla-final {
+
 width: min(100%,520px);
+
 min-height: 430px;
+
 padding: 45px 25px;
 
+
+
 display: flex;
+
 flex-direction: column;
+
 align-items: center;
+
 justify-content: center;
+
 gap: 18px;
+
+
 
 text-align: center;
 
+
+
 animation: aparecer 1s ease both;
+
 }
+
+
 
 .pantalla-final p {
+
 color: #d6e2d8;
+
 font-size: .7rem;
+
 letter-spacing: .18em;
+
 text-transform: uppercase;
+
 }
+
+
 
 .pantalla-final h2 {
+
 color: #f5f3e9;
+
 font: 3rem 'Great Vibes',cursive;
+
 margin: 0;
+
 }
+
+
 
 .pantalla-final span {
+
 color: #c9d6cb;
+
 font: 1rem 'Cormorant Garamond',serif;
+
 }
+
+
 
 .destello-final {
+
 color: #e2cf9c;
+
 font-size: 3rem;
+
 animation: brilloFinal 2s ease-in-out infinite alternate;
+
 }
+
+
 
 @keyframes brilloFinal {
+
 from {
+
 opacity: .55;
+
 transform: scale(.9) rotate(-8deg);
+
 }
 
+
+
 to {
+
 opacity: 1;
+
 transform: scale(1.12) rotate(8deg);
+
 }
+
 }
+
+
 
 /* Estrellas que aparecen en la despedida */
 
+
+
 .pantalla-final .estrella {
+
 z-index: 0;
+
 }
 
+
+
 /* ---------------------------------------------------------
+
 22. ADAPTACIÓN A CELULARES
+
 --------------------------------------------------------- */
+
+
 
 @media (max-width: 480px) {
 
+
+
 #universo {
+
 padding: 24px 12px;
+
 }
+
+
 
 .contenedor-sobre {
+
 width: min(82vw,330px);
+
 }
+
+
 
 .escenario-hojas {
+
 height: min(66svh,540px);
+
 min-height: 430px;
+
 }
+
+
 
 .marco-hoja {
+
 padding: 32px 25px 25px;
+
 }
+
+
 
 .controles-paginas {
+
 gap: 5px;
+
 }
+
+
 
 .controles-paginas button {
+
 padding: 9px 11px;
+
 font-size: .65rem;
+
 }
+
+
 
 .momento {
+
 gap: 17px;
-}
+
 }
 
+}
+
+
+
 /* ---------------------------------------------------------
+
 23. RESPETO A LA PREFERENCIA DE MOVIMIENTO REDUCIDO
+
 --------------------------------------------------------- */
+
+
 
 @media (prefers-reduced-motion: reduce) {
 
+
+
 *,
+
 *::before,
+
 *::after {
+
 animation-duration: .01ms !important;
+
 animation-iteration-count: 1 !important;
+
 transition-duration: .01ms !important;
+
 scroll-behavior: auto !important;
+
 }
+
 }
+
+
+
 
 /* =========================================================
-AJUSTES RESPONSIVOS PARA LA INVITACIÓN
-Agregar al final de estilos.css
-========================================================= */
+   24. AJUSTES RESPONSIVOS Y ALTURA COMPLETA DE LAS HOJAS
+   ========================================================= */
 
-/* La portada debe permitir que el texto se acomode */
+/* El contenido puede crecer sin quedar recortado por el fondo */
+#universo {
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+/* Texto de portada */
 .intro-texto {
-width: min(100%, 440px);
-padding: 0 12px;
+    width: min(100%, 440px);
+    padding: 0 12px;
 }
 
 .intro-texto span {
-display: block;
-max-width: 410px;
-margin: 12px auto 0;
-font-size: clamp(.72rem, 2.5vw, .88rem);
-line-height: 1.7;
-overflow-wrap: break-word;
-text-wrap: pretty;
+    display: block;
+    max-width: 410px;
+    margin: 12px auto 0;
+    font-size: clamp(.72rem, 2.5vw, .88rem);
+    line-height: 1.7;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
 }
 
-/* El escenario ya no debe obligar a todas las hojas
-a tener una altura demasiado pequeña */
+/* Escenario: todas las hojas comparten una altura real */
 .escenario-hojas {
-height: auto;
-min-height: 540px;
-max-height: 78svh;
-overflow: visible;
+    width: min(100%, 430px);
+    height: clamp(500px, 72svh, 570px);
+    min-height: 500px;
+    max-height: none;
+    overflow: visible;
+    position: relative;
 }
 
-/* Cada hoja ocupa el espacio disponible */
+/* Las hojas ocupan toda la altura del escenario */
 .hoja {
-height: 100%;
-min-height: 540px;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
 }
 
-/* El papel permite desplazamiento si el texto es largo */
+/* Marco completo, con scroll interno si el texto es largo */
 .marco-hoja {
-height: 100%;
-min-height: 540px;
-overflow-y: auto;
-overflow-x: hidden;
-justify-content: flex-start;
-padding: 45px 34px 35px;
-scrollbar-width: thin;
-scrollbar-color: #b8aa82 transparent;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    box-sizing: border-box;
+    padding: 45px 34px 35px;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #b8aa82 transparent;
+    overscroll-behavior: contain;
 }
 
-/* Los párrafos se ajustan al ancho de la hoja */
+/* El borde interior se extiende por toda la hoja */
+.marco-hoja::before {
+    pointer-events: none;
+}
+
+/* Evita que los textos largos se salgan del papel */
 .marco-hoja p,
 .marco-hoja small,
 .marco-hoja h2,
 .marco-hoja h3 {
-max-width: 100%;
-overflow-wrap: anywhere;
-word-break: normal;
-text-wrap: pretty;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    text-wrap: pretty;
 }
 
-/* El texto de introducción no debe ocupar demasiado espacio */
+/* Introducciones */
 .sobrelinea {
-width: 100%;
-max-width: 310px;
-font-size: clamp(.58rem, 2vw, .72rem);
-line-height: 1.65;
-letter-spacing: .10em;
+    width: 100%;
+    max-width: 310px;
+    font-size: clamp(.58rem, 2vw, .72rem);
+    line-height: 1.65;
+    letter-spacing: .10em;
 }
 
-/* Nombre de la quinceañera: se adapta a pantallas pequeñas */
+/* Fotografía */
+.marco-foto {
+    width: clamp(115px, 35vw, 165px);
+    height: clamp(135px, 41vw, 185px);
+    flex: 0 0 auto;
+}
+
+/* Nombre de la quinceañera */
 .nombre-script {
-font-size: clamp(1.7rem, 6vw, 2.7rem);
-line-height: 1.2;
-overflow-wrap: anywhere;
+    font-size: clamp(1.7rem, 6vw, 2.7rem);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
-/* Títulos de las hojas */
+/* Títulos */
 .titulo-hoja {
-font-size: clamp(1.45rem, 5vw, 2.1rem);
-line-height: 1.2;
-text-wrap: balance;
+    font-size: clamp(1.45rem, 5vw, 2.1rem);
+    line-height: 1.2;
+    text-wrap: balance;
 }
 
-/* Párrafos normales */
+/* Párrafos */
 .texto-hoja {
-width: 100%;
-max-width: 310px;
-font-size: clamp(.78rem, 2.5vw, .95rem);
-line-height: 1.65;
+    width: 100%;
+    max-width: 310px;
+    font-size: clamp(.78rem, 2.5vw, .95rem);
+    line-height: 1.65;
 }
 
 /* Datos de misa y recepción */
+.evento {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    flex: 0 0 auto;
+}
+
 .detalle-evento {
-width: 100%;
-max-width: 300px;
-margin: 6px auto 0;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    max-height: none;
+    margin: 6px auto 0;
+    overflow: visible;
+    padding-bottom: 12px;
 }
 
 .detalle-evento p {
-color: #788174;
-font-family: 'Montserrat', sans-serif;
-font-size: clamp(.62rem, 2.1vw, .72rem);
-line-height: 1.65;
-margin: 5px 0;
-text-align: center;
+    color: #788174;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(.62rem, 2.1vw, .72rem);
+    line-height: 1.65;
+    margin: 5px 0;
+    text-align: center;
 }
 
-/* Evita que los nombres de los padres y padrinos
-se desborden */
+/* Hoja 3: anula las alturas automáticas o límites anteriores
+   y hace que el marco llegue hasta abajo del escenario. */
+.hoja[data-page="2"] {
+    height: 100%;
+}
+
+.hoja[data-page="2"] .marco-hoja {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    justify-content: flex-start;
+    padding-bottom: 35px;
+}
+
+.hoja[data-page="2"] .evento,
+.hoja[data-page="2"] .detalle-evento {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex: 0 0 auto;
+}
+
+/* Nombres de padres y padrinos */
 .bloque-nombres p {
-font-size: clamp(1.05rem, 4vw, 1.3rem);
-overflow-wrap: anywhere;
+    font-size: clamp(1.05rem, 4vw, 1.3rem);
+    overflow-wrap: anywhere;
 }
 
 /* Frase de sugerencias */
 .frase {
-width: 100%;
-max-width: 290px;
-font-size: clamp(1rem, 3.8vw, 1.2rem);
-line-height: 1.55;
+    width: 100%;
+    max-width: 290px;
+    font-size: clamp(1rem, 3.8vw, 1.2rem);
+    line-height: 1.55;
 }
 
-/* Texto de despedida */
+/* Despedida */
 .titulo-despedida {
-font-size: clamp(1.25rem, 4.5vw, 1.8rem);
-line-height: 1.45;
-max-width: 310px;
+    font-size: clamp(1.25rem, 4.5vw, 1.8rem);
+    line-height: 1.45;
+    max-width: 310px;
 }
 
-/* Ajustes específicos para teléfonos */
-@media (max-width: 600px) {
-
-#universo {
-padding: 20px 12px;
-}
-
-.experiencia {
-width: 100%;
-}
-
-.escenario-hojas {
-width: min(100%, 410px);
-min-height: 520px;
-max-height: 76svh;
-}
-
-.hoja,
-.marco-hoja {
-min-height: 520px;
-}
-
-.marco-hoja {
-padding: 42px 25px 30px;
-}
-
-.marco-foto {
-width: clamp(115px, 35vw, 150px);
-height: clamp(135px, 41vw, 170px);
-}
-
+/* Controles */
 .controles-paginas {
-width: 100%;
+    width: min(100%, 430px);
 }
 
-.controles-paginas button {
-padding: 10px 12px;
-font-size: .65rem;
+/* Teléfonos */
+@media (max-width: 600px) {
+    #universo {
+        padding: 20px 12px;
+    }
+
+    .experiencia {
+        width: 100%;
+    }
+
+    .escenario-hojas {
+        width: min(100%, 430px);
+        height: clamp(500px, 72svh, 550px);
+        min-height: 500px;
+    }
+
+    .marco-hoja {
+        padding: 42px 25px 30px;
+    }
+
+    .marco-foto {
+        width: clamp(115px, 35vw, 150px);
+        height: clamp(135px, 41vw, 170px);
+    }
+
+    .controles-paginas {
+        width: 100%;
+        gap: 5px;
+    }
+
+    .controles-paginas button {
+        padding: 9px 11px;
+        font-size: .65rem;
+    }
+
+    .ayuda-paginas {
+        text-align: center;
+        line-height: 1.5;
+    }
 }
 
-.ayuda-paginas {
-text-align: center;
-line-height: 1.5;
-}
-}
-
-/* Ajustes para tabletas */
+/* Tabletas */
 @media (min-width: 601px) and (max-width: 900px) {
+    .escenario-hojas {
+        width: min(90vw, 440px);
+        height: clamp(540px, 72svh, 580px);
+        min-height: 540px;
+    }
 
-.escenario-hojas {
-width: min(90vw, 440px);
-min-height: 560px;
+    .marco-hoja {
+        padding: 48px 38px 35px;
+    }
 }
 
-.hoja,
-.marco-hoja {
-min-height: 560px;
-}
-
-.marco-hoja {
-padding: 48px 38px 35px;
-}
-}
-
-/* Ajustes para computadoras */
+/* Computadoras */
 @media (min-width: 901px) {
-
-.escenario-hojas {
-width: 430px;
-min-height: 570px;
-}
-
-.hoja,
-.marco-hoja {
-min-height: 570px;
-}
+    .escenario-hojas {
+        width: 430px;
+        height: 570px;
+        min-height: 570px;
+    }
 }
