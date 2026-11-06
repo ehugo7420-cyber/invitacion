@@ -60,20 +60,20 @@ overflow: hidden;
 
 background:
 radial-gradient(
-    ellipse at 50% 45%,
-    rgba(120,145,132,.28),
-    transparent 55%
+ellipse at 50% 45%,
+rgba(120,145,132,.28),
+transparent 55%
 ),
 radial-gradient(
-    ellipse at 15% 15%,
-    rgba(170,190,174,.15),
-    transparent 35%
+ellipse at 15% 15%,
+rgba(170,190,174,.15),
+transparent 35%
 ),
 linear-gradient(
-    145deg,
-    #111b17,
-    #263b33 55%,
-    #17231f
+145deg,
+#111b17,
+#263b33 55%,
+#17231f
 );
 }
 
@@ -87,9 +87,9 @@ pointer-events: none;
 
 background:
 radial-gradient(
-    circle,
-    rgba(205,190,145,.10),
-    transparent 48%
+circle,
+rgba(205,190,145,.10),
+transparent 48%
 );
 
 animation: luzRespira 8s ease-in-out infinite alternate;
@@ -157,7 +157,7 @@ opacity: .5;
 
 filter:
 drop-shadow(
-    0 0 7px rgba(223,192,145,.45)
+0 0 7px rgba(223,192,145,.45)
 );
 
 animation:
@@ -286,9 +286,9 @@ border-radius: 5px;
 .sobre-atras {
 background:
 linear-gradient(
-    145deg,
-    #718b7c,
-    #344b42
+145deg,
+#718b7c,
+#344b42
 );
 
 box-shadow: var(--sombra);
@@ -305,9 +305,9 @@ height: 190px;
 
 background:
 linear-gradient(
-    145deg,
-    #fffaf1,
-    #e1e9df
+145deg,
+#fffaf1,
+#e1e9df
 );
 
 color: #42584a;
@@ -347,18 +347,18 @@ color: #9b895e;
 .sobre-frente {
 clip-path:
 polygon(
-    0 100%,
-    0 0,
-    50% 57%,
-    100% 0,
-    100% 100%
+0 100%,
+0 0,
+50% 57%,
+100% 0,
+100% 100%
 );
 
 background:
 linear-gradient(
-    145deg,
-    #718b7c,
-    #3f5a4b
+145deg,
+#718b7c,
+#3f5a4b
 );
 
 z-index: 3;
@@ -372,16 +372,16 @@ inset: 0;
 
 clip-path:
 polygon(
-    0 0,
-    100% 0,
-    50% 58%
+0 0,
+100% 0,
+50% 58%
 );
 
 background:
 linear-gradient(
-    160deg,
-    #8ca394,
-    #506c5a
+160deg,
+#8ca394,
+#506c5a
 );
 
 z-index: 4;
@@ -410,9 +410,9 @@ place-items: center;
 
 background:
 radial-gradient(
-    circle at 35% 30%,
-    #d6c39a,
-    #617d6c 68%
+circle at 35% 30%,
+#d6c39a,
+#617d6c 68%
 );
 
 border: 2px solid #d8c79f;
@@ -476,9 +476,9 @@ box-shadow .25s;
 .boton-principal {
 background:
 linear-gradient(
-    135deg,
-    #789184,
-    #526c5b
+135deg,
+#789184,
+#526c5b
 );
 
 color: #fff8ff;
@@ -561,9 +561,9 @@ height: 1px;
 
 background:
 linear-gradient(
-    90deg,
-    transparent,
-    #bda66e
+90deg,
+transparent,
+#bda66e
 );
 }
 
@@ -639,10 +639,10 @@ color: var(--tinta);
 
 background:
 radial-gradient(
-    circle at 50% 0%,
-    #fff 0,
-    #fffaf3 48%,
-    #f0eee3 100%
+circle at 50% 0%,
+#fff 0,
+#fffaf3 48%,
+#f0eee3 100%
 );
 
 border: 1px solid #d0c4a3;
@@ -748,9 +748,9 @@ gap: 8px;
 
 background:
 linear-gradient(
-    145deg,
-    #e8e9df,
-    #fdf8f2
+145deg,
+#e8e9df,
+#fdf8f2
 );
 
 color: #5b7461;
@@ -1076,9 +1076,9 @@ animation: hojaEntra .75s ease both;
 to {
 opacity: 0;
 transform:
-    translateY(25px)
-    rotateX(-8deg)
-    scale(.94);
+translateY(25px)
+rotateX(-8deg)
+scale(.94);
 }
 }
 
@@ -1086,17 +1086,17 @@ transform:
 from {
 opacity: 0;
 transform:
-    translateY(-20px)
-    rotateX(8deg)
-    scale(.94);
+translateY(-20px)
+rotateX(8deg)
+scale(.94);
 }
 
 to {
 opacity: 1;
 transform:
-    translateY(0)
-    rotateX(0)
-    scale(1);
+translateY(0)
+rotateX(0)
+scale(1);
 }
 }
 
@@ -1133,8 +1133,8 @@ transform: translate(0,0) scale(1);
 to {
 opacity: 0;
 transform:
-    translate(var(--dx),var(--dy))
-    scale(.1);
+translate(var(--dx),var(--dy))
+scale(.1);
 }
 }
 
@@ -1250,5 +1250,211 @@ animation-duration: .01ms !important;
 animation-iteration-count: 1 !important;
 transition-duration: .01ms !important;
 scroll-behavior: auto !important;
+}
+}
+
+/* =========================================================
+AJUSTES RESPONSIVOS PARA LA INVITACIÓN
+Agregar al final de estilos.css
+========================================================= */
+
+/* La portada debe permitir que el texto se acomode */
+.intro-texto {
+width: min(100%, 440px);
+padding: 0 12px;
+}
+
+.intro-texto span {
+display: block;
+max-width: 410px;
+margin: 12px auto 0;
+font-size: clamp(.72rem, 2.5vw, .88rem);
+line-height: 1.7;
+overflow-wrap: break-word;
+text-wrap: pretty;
+}
+
+/* El escenario ya no debe obligar a todas las hojas
+a tener una altura demasiado pequeña */
+.escenario-hojas {
+height: auto;
+min-height: 540px;
+max-height: 78svh;
+overflow: visible;
+}
+
+/* Cada hoja ocupa el espacio disponible */
+.hoja {
+height: 100%;
+min-height: 540px;
+}
+
+/* El papel permite desplazamiento si el texto es largo */
+.marco-hoja {
+height: 100%;
+min-height: 540px;
+overflow-y: auto;
+overflow-x: hidden;
+justify-content: flex-start;
+padding: 45px 34px 35px;
+scrollbar-width: thin;
+scrollbar-color: #b8aa82 transparent;
+}
+
+/* Los párrafos se ajustan al ancho de la hoja */
+.marco-hoja p,
+.marco-hoja small,
+.marco-hoja h2,
+.marco-hoja h3 {
+max-width: 100%;
+overflow-wrap: anywhere;
+word-break: normal;
+text-wrap: pretty;
+}
+
+/* El texto de introducción no debe ocupar demasiado espacio */
+.sobrelinea {
+width: 100%;
+max-width: 310px;
+font-size: clamp(.58rem, 2vw, .72rem);
+line-height: 1.65;
+letter-spacing: .10em;
+}
+
+/* Nombre de la quinceañera: se adapta a pantallas pequeñas */
+.nombre-script {
+font-size: clamp(1.7rem, 6vw, 2.7rem);
+line-height: 1.2;
+overflow-wrap: anywhere;
+}
+
+/* Títulos de las hojas */
+.titulo-hoja {
+font-size: clamp(1.45rem, 5vw, 2.1rem);
+line-height: 1.2;
+text-wrap: balance;
+}
+
+/* Párrafos normales */
+.texto-hoja {
+width: 100%;
+max-width: 310px;
+font-size: clamp(.78rem, 2.5vw, .95rem);
+line-height: 1.65;
+}
+
+/* Datos de misa y recepción */
+.detalle-evento {
+width: 100%;
+max-width: 300px;
+margin: 6px auto 0;
+}
+
+.detalle-evento p {
+color: #788174;
+font-family: 'Montserrat', sans-serif;
+font-size: clamp(.62rem, 2.1vw, .72rem);
+line-height: 1.65;
+margin: 5px 0;
+text-align: center;
+}
+
+/* Evita que los nombres de los padres y padrinos
+se desborden */
+.bloque-nombres p {
+font-size: clamp(1.05rem, 4vw, 1.3rem);
+overflow-wrap: anywhere;
+}
+
+/* Frase de sugerencias */
+.frase {
+width: 100%;
+max-width: 290px;
+font-size: clamp(1rem, 3.8vw, 1.2rem);
+line-height: 1.55;
+}
+
+/* Texto de despedida */
+.titulo-despedida {
+font-size: clamp(1.25rem, 4.5vw, 1.8rem);
+line-height: 1.45;
+max-width: 310px;
+}
+
+/* Ajustes específicos para teléfonos */
+@media (max-width: 600px) {
+
+#universo {
+padding: 20px 12px;
+}
+
+.experiencia {
+width: 100%;
+}
+
+.escenario-hojas {
+width: min(100%, 410px);
+min-height: 520px;
+max-height: 76svh;
+}
+
+.hoja,
+.marco-hoja {
+min-height: 520px;
+}
+
+.marco-hoja {
+padding: 42px 25px 30px;
+}
+
+.marco-foto {
+width: clamp(115px, 35vw, 150px);
+height: clamp(135px, 41vw, 170px);
+}
+
+.controles-paginas {
+width: 100%;
+}
+
+.controles-paginas button {
+padding: 10px 12px;
+font-size: .65rem;
+}
+
+.ayuda-paginas {
+text-align: center;
+line-height: 1.5;
+}
+}
+
+/* Ajustes para tabletas */
+@media (min-width: 601px) and (max-width: 900px) {
+
+.escenario-hojas {
+width: min(90vw, 440px);
+min-height: 560px;
+}
+
+.hoja,
+.marco-hoja {
+min-height: 560px;
+}
+
+.marco-hoja {
+padding: 48px 38px 35px;
+}
+}
+
+/* Ajustes para computadoras */
+@media (min-width: 901px) {
+
+.escenario-hojas {
+width: 430px;
+min-height: 570px;
+}
+
+.hoja,
+.marco-hoja {
+min-height: 570px;
 }
 }

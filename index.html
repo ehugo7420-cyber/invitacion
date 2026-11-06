@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <!--
 INVITACIÓN DE XV AÑOS
-Archivo principal: contiene la estructura y los textos editables.
-Los estilos están en estilos.css y las animaciones en script.js.
+Archivo principal de la invitación.
+Los estilos se encuentran en estilos.css
+y las animaciones y navegación en script.js.
 -->
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +14,13 @@ Los estilos están en estilos.css y las animaciones en script.js.
 
 <title>Invitación especial | Mis XV años</title>
 
-<!-- Tipografías decorativas utilizadas en la invitación -->
+<!-- Tipografías -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Archivo de estilos -->
+<!-- Hoja de estilos -->
 <link rel="stylesheet" href="estilos.css">
 </head>
 
@@ -26,76 +28,97 @@ Los estilos están en estilos.css y las animaciones en script.js.
 
 <main id="universo">
 
-<!-- Elementos decorativos del fondo -->
+<!-- Fondo decorativo -->
 <div class="fondo-luz"></div>
 <div id="estrellas" aria-hidden="true"></div>
 <div id="mariposas" aria-hidden="true"></div>
 
-<!-- PORTADA Y SOBRE -->
+<!-- ===================================================
+    PORTADA Y SOBRE
+    =================================================== -->
+
 <section id="escenaInicio"
-    class="escena-inicio"
-    aria-label="Sobre de invitación">
+class="escena-inicio"
+aria-label="Sobre de invitación">
 
-    <div class="intro-texto">
+<div class="intro-texto">
+
     <p>Una invitación muy especial</p>
-    <h1>Mis XV años</h1>
-    <span>[Frase de bienvenida]</span>
-    </div>
 
-    <!-- Sobre que se abre al presionar el botón -->
-    <div id="contenedorSobre" class="contenedor-sobre">
+    <h1>Mis XV años</h1>
+
+    <span>
+    Con el corazon lleno de alegria y emociones, te
+    invitamos a que seas parte de una noche muy especial,
+    en la que celebraremos mis XV año, una etapa
+    llena de sueños, ilusiones y nuevos comienzos.
+    ¡Te esperamos para compartir juntos esta hermosa selebracion!
+    </span>
+
+</div>
+
+<!-- Sobre que se abre al presionar el botón -->
+<div id="contenedorSobre" class="contenedor-sobre">
 
     <div class="sobre-sombra"></div>
 
     <div id="sobre" class="sobre">
 
-        <div class="sobre-parte sobre-atras"></div>
+    <div class="sobre-parte sobre-atras"></div>
 
-        <div class="sobre-carta" aria-hidden="true">
+    <div class="sobre-carta" aria-hidden="true">
         <span class="carta-mini-titulo">Una noche para recordar</span>
         <span class="carta-mini-nombre">Mis XV</span>
         <span class="carta-mini-adornado">✧</span>
-        </div>
-
-        <div class="sobre-parte sobre-frente"></div>
-        <div class="sobre-solapa"></div>
-
-        <div class="sello">XV</div>
-
-    </div>
     </div>
 
-    <button id="botonAbrir" class="boton-principal" type="button">
+    <div class="sobre-parte sobre-frente"></div>
+    <div class="sobre-solapa"></div>
+
+    <div class="sello">XV</div>
+
+    </div>
+</div>
+
+<button id="botonAbrir" class="boton-principal" type="button">
     Abrir invitación <span>✧</span>
-    </button>
+</button>
 
-    <p class="nota-inicio">Toca el botón para comenzar</p>
+<p class="nota-inicio">Toca el botón para comenzar</p>
 
 </section>
 
-<!-- INVITACIÓN POR PÁGINAS -->
-<section id="experiencia"
-    class="experiencia oculto"
-    aria-label="Invitación por páginas">
 
-    <div class="encabezado-experiencia">
+<!-- ===================================================
+    INVITACIÓN
+    =================================================== -->
+
+<section id="experiencia"
+class="experiencia oculto"
+aria-label="Invitación por páginas">
+
+<div class="encabezado-experiencia">
     <span class="linea-adorno"></span>
     <p>Una celebración inolvidable</p>
     <span class="linea-adorno"></span>
-    </div>
+</div>
 
-    <div class="escenario-hojas">
+<div class="escenario-hojas">
 
-    <!-- Contenedor de los destellos entre páginas -->
+    <!-- Destellos al cambiar de página -->
     <div id="destellosCambio"
-        class="destellos-cambio"
-        aria-hidden="true">
+    class="destellos-cambio"
+    aria-hidden="true">
     </div>
 
-    <!-- HOJA 1: FOTOGRAFÍA Y NOMBRE -->
+
+    <!-- =================================================
+        HOJA 1: FOTOGRAFÍA Y NOMBRE
+        ================================================= -->
+
     <article class="hoja activa" data-page="0">
 
-        <div class="marco-hoja">
+    <div class="marco-hoja">
 
         <span class="esquina esquina-tl">❧</span>
         <span class="esquina esquina-tr">❧</span>
@@ -103,41 +126,51 @@ Los estilos están en estilos.css y las animaciones en script.js.
         <span class="esquina esquina-br">❧</span>
 
         <p class="sobrelinea">
-            [Texto de invitación]
+        Hay momentos en la vida que se convierten en
+        recuerdos inolvidables, y este es uno de ellos.
+        Sera un honor contar con tu precencia y compartir
+        contigo esta fecha tan importanten para mi.
         </p>
 
         <!-- Fotografía de la quinceañera -->
         <div class="marco-foto">
 
-            <img src="recursos/quinceanera.jpeg"
+        <img
+            src="recursos/quinceanera.jpeg"
             alt="Fotografía de la quinceañera"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+        >
 
-            <!-- Se muestra si la fotografía no se encuentra -->
-            <div class="foto-placeholder">
+        <!-- Aparece si no se encuentra la fotografía -->
+        <div class="foto-placeholder">
             <span>[Fotografía de la quinceañera]</span>
             <small>[Agregar fotografía]</small>
-            </div>
+        </div>
 
         </div>
 
         <h2 class="nombre-script">
-            [Nombre de la quinceañera]
+        Castillo Espinosa Hillary Mariana
         </h2>
 
         <p class="texto-hoja">
-            [Mensaje de presentación]
+        ¡Con mucha ilucion queremos compartir contigo un momento
+        muy especial!
         </p>
 
         <div class="adorno-centro">✧ ❦ ✧</div>
 
-        </div>
+    </div>
     </article>
 
-    <!-- HOJA 2: PADRES Y PADRINOS -->
+
+    <!-- =================================================
+        HOJA 2: PADRES Y PADRINOS
+        ================================================= -->
+
     <article class="hoja" data-page="1">
 
-        <div class="marco-hoja">
+    <div class="marco-hoja">
 
         <span class="esquina esquina-tl">❧</span>
         <span class="esquina esquina-tr">❧</span>
@@ -145,23 +178,24 @@ Los estilos están en estilos.css y las animaciones en script.js.
         <span class="numero-romano">II</span>
 
         <p class="sobrelinea">
-            [Texto introductorio]
+        Espero contar con tu precencia para celebrar juntos esta
+        noche magica.
         </p>
 
         <h2 class="titulo-hoja">
-            Con la bendición de
+        Con la bendición de
         </h2>
 
         <!-- Información de los padres -->
         <div class="bloque-nombres">
 
-            <span class="etiqueta">Mis padres</span>
+        <span class="etiqueta">Mis padres</span>
 
-            <p>[Nombre de mamá]</p>
+        <p>Ana Espinosa</p>
 
-            <span class="y">&</span>
+        <span class="y">&</span>
 
-            <p>[Nombre de papá]</p>
+        <p>Eduardo Castillo</p>
 
         </div>
 
@@ -170,54 +204,75 @@ Los estilos están en estilos.css y las animaciones en script.js.
         <!-- Información de los padrinos -->
         <div class="bloque-nombres">
 
-            <span class="etiqueta">Mis padrinos</span>
+        <span class="etiqueta">Mis padrinos</span>
 
-            <p>[Nombre de padrino]</p>
+        <p>Ricardo</p>
 
-            <span class="y">&</span>
+        <span class="y">&</span>
 
-            <p>[Nombre de madrina]</p>
+        <p>Esmeralda</p>
 
         </div>
 
         <p class="texto-hoja pequeno">
-            [Mensaje de agradecimiento]
+        Gracias por acompañarme, compartir mi felicidad y
+        ser parte de este hermoso sueño.
         </p>
 
-        </div>
+    </div>
     </article>
 
-    <!-- HOJA 3: CEREMONIA Y RECEPCIÓN -->
+
+    <!-- =================================================
+        HOJA 3: MISA Y RECEPCIÓN
+        ================================================= -->
+
     <article class="hoja" data-page="2">
 
-        <div class="marco-hoja">
+    <div class="marco-hoja">
 
         <span class="esquina esquina-tl">❧</span>
         <span class="esquina esquina-tr">❧</span>
 
         <span class="numero-romano">III</span>
 
-        <p class="sobrelinea">
-            [Texto introductorio]
-        </p>
-
         <h2 class="titulo-hoja">
-            Nuestra celebración
+        Nuestra celebración
         </h2>
 
         <!-- Información de la misa -->
         <div class="evento">
 
-            <span class="icono-evento">✧</span>
+        <span class="icono-evento">✧</span>
 
-            <h3>Misa</h3>
+        <h3>Misa</h3>
 
-            <p>[Nombre de la iglesia]</p>
+        <p>Iglesia Santa Ana</p>
 
-            <small>Seguimiento de la misa</small>
-            <small>[Información o indicaciones de la misa]</small>
-            <small>[Hora de la ceremonia]</small>
-            <small>[Dirección de la iglesia]</small>
+        <small>Seguimiento de la misa</small>
+
+        <div class="detalle-evento">
+            <p>
+            [Información o indicaciones de la misa]
+            </p>
+
+            <p>2:00 pm</p>
+
+            <p>
+            Comunidad de Santa Ana de abajo,
+            Calle Miguel Hidalgo S/N.
+            </p>
+
+            <p>
+            Seguimiento de la misa (Informacion o indicaciones):
+            </p>
+
+            <p>
+            Salida de la cabalgata: Quinta sagil carretera doctor arroyo.
+            </p>
+
+            <p>Hora de reunion: 1:30pm</p>
+        </div>
 
         </div>
 
@@ -226,221 +281,174 @@ Los estilos están en estilos.css y las animaciones en script.js.
         <!-- Información de la recepción -->
         <div class="evento">
 
-            <span class="icono-evento">✧</span>
+        <span class="icono-evento">✧</span>
 
-            <h3>Recepción</h3>
+        <h3>Recepción</h3>
 
-            <p>[Nombre del salón]</p>
+        <p>Casa de la Familia Diaz Espinosa</p>
 
-            <small>[Hora de recepción]</small>
-            <small>[Dirección del salón]</small>
+        <div class="detalle-evento">
+            <p>
+            Comunidad de Santa Ana de abajo,
+            calle Rosaura Zapata #718
+            </p>
+        </div>
 
         </div>
 
         <div class="fecha-destacada">
-            [Día, fecha y año]
+        25/12/2026
         </div>
 
-        </div>
+    </div>
     </article>
 
-    <!-- HOJA 4: PROGRAMA -->
+
+    <!-- =================================================
+        HOJA 4: SUGERENCIAS Y DESEOS
+        Se integró aquí el texto de la antigua hoja 4.
+        ================================================= -->
+
     <article class="hoja" data-page="3">
 
-        <div class="marco-hoja">
+    <div class="marco-hoja">
 
         <span class="esquina esquina-tl">❧</span>
         <span class="esquina esquina-tr">❧</span>
 
         <span class="numero-romano">IV</span>
 
+        <!-- Texto que estaba en el encabezado de la hoja 4 -->
         <p class="sobrelinea">
-            [Texto introductorio]
+        Espero contar con su precensia para celebrar
+        juntos esta noche magica.
         </p>
 
         <h2 class="titulo-hoja">
-            Momentos especiales
+        Sugerencias y deseos
         </h2>
 
-        <!-- Horarios y momentos de la celebración -->
-        <div class="timeline">
+        <div class="regalo-icono">✧</div>
 
-            <div class="momento">
-            <span>[Hora]</span>
-            <p>[Actividad 1]</p>
-            </div>
-
-            <div class="momento">
-            <span>[Hora]</span>
-            <p>[Actividad 2]</p>
-            </div>
-
-            <div class="momento">
-            <span>[Hora]</span>
-            <p>[Actividad 3]</p>
-            </div>
-
-            <div class="momento">
-            <span>[Hora]</span>
-            <p>[Actividad 4]</p>
-            </div>
-
-            <div class="momento">
-            <span>[Hora]</span>
-            <!-- Escribe aquí la descripción del último momento -->
-            <p>[Descripción del momento]</p>
-            </div>
-
-        </div>
-
-        <p class="texto-hoja pequeno">
-            [Mensaje adicional del programa]
+        <p class="texto-hoja">
+        Sobre, Bolsa de regalo o Caja de regalo
         </p>
 
-        </div>
+        <div class="separador">✧ ❦ ✧</div>
+
+        <p class="frase">
+        Mis XV años son un sueño hecho realidad, y quiero que
+        seas parte de esta linda historia.
+        </p>
+
+    </div>
     </article>
 
-    <!-- HOJA 5: REGALOS Y FRASE -->
+
+    <!-- =================================================
+        HOJA 5: DESPEDIDA
+        ================================================= -->
+
     <article class="hoja" data-page="4">
 
-        <div class="marco-hoja">
+    <div class="marco-hoja">
 
         <span class="esquina esquina-tl">❧</span>
         <span class="esquina esquina-tr">❧</span>
 
         <span class="numero-romano">V</span>
 
-        <p class="sobrelinea">
-            [Texto introductorio]
-        </p>
-
-        <h2 class="titulo-hoja">
-            Sugerencias y deseos
-        </h2>
-
-        <div class="regalo-icono">✧</div>
-
-        <h3 class="subtitulo-hoja">
-            [Tipo de regalo]
-        </h3>
-
-        <p class="texto-hoja">
-            [Mensaje sobre sugerencias de regalos]
-        </p>
-
-        <div class="separador">✧ ❦ ✧</div>
-
-        <p class="frase">
-            [Frase especial de la quinceañera]
-        </p>
-
-        <p class="firma-frase">
-            [Firma o dedicatoria]
-        </p>
-
-        </div>
-    </article>
-
-    <!-- HOJA 6: DESPEDIDA -->
-    <article class="hoja" data-page="5">
-
-        <div class="marco-hoja">
-
-        <span class="esquina esquina-tl">❧</span>
-        <span class="esquina esquina-tr">❧</span>
-
-        <span class="numero-romano">VI</span>
-
         <div class="adorno-final">✧</div>
 
         <p class="sobrelinea">
-            [Mensaje de despedida]
+        No flates, tu compañia hará de esta noche un recuerdo inolvidable. ¡Te esperamos!
         </p>
 
         <h2 class="titulo-hoja titulo-despedida">
-            [Mensaje final]
+        Hoy mis sueños se visten de ilusion y mi corazon se llena de alegria al celebrar mis XV añoa.
         </h2>
 
         <p class="nombre-script nombre-final">
-            [Nombre de la quinceañera]
+        Castillo Espinosa Hillary Mariana
         </p>
 
         <p class="texto-hoja">
-            [Agradecimiento a los invitados]
+        Su precensia, cariño y buenos deseos haran que la
+        celebracion de mis XV años sea un recuerdo inolvidable.
         </p>
 
         <div class="adorno-centro">❦ ✧ ❦</div>
 
         <p class="fecha-destacada">
-            [Fecha de los XV años]
+        25 de Diciembre de 2026
         </p>
 
-        <p class="texto-hoja pequeno">
-            [Mensaje de cierre]
-        </p>
-
-        </div>
+    </div>
     </article>
 
-    </div>
+</div>
 
-    <!-- BOTONES DE NAVEGACIÓN -->
-    <div class="controles-paginas">
 
-    <button id="botonAnterior"
-        class="boton-secundario"
-        type="button"
-        disabled>
-        ← Anterior
+<!-- ===================================================
+        BOTONES DE NAVEGACIÓN
+        =================================================== -->
+
+<div class="controles-paginas">
+
+    <button
+    id="botonAnterior"
+    class="boton-secundario"
+    type="button"
+    disabled>
+    ← Anterior
     </button>
 
-    <div class="progreso"
-        aria-label="Progreso de la invitación">
+    <div class="progreso" aria-label="Progreso de la invitación">
 
-        <div id="puntosProgreso"
-        class="puntos-progreso">
-        </div>
+    <div id="puntosProgreso" class="puntos-progreso"></div>
 
-        <span id="contadorPagina">1 de 6</span>
+    <span id="contadorPagina">1 de 5</span>
 
     </div>
 
-    <button id="botonSiguiente"
-        class="boton-principal"
-        type="button">
-        Siguiente ✧
+    <button
+    id="botonSiguiente"
+    class="boton-principal"
+    type="button">
+    Siguiente ✧
     </button>
 
-    </div>
+</div>
 
-    <p class="ayuda-paginas">
+<p class="ayuda-paginas">
     También puedes tocar la hoja para continuar
-    </p>
+</p>
 
 </section>
 
-<!-- PANTALLA FINAL -->
+
+<!-- ===================================================
+    PANTALLA FINAL
+    =================================================== -->
+
 <section id="pantallaFinal" class="pantalla-final oculto">
 
-    <div class="destello-final">✧</div>
+<div class="destello-final">✧</div>
 
-    <p>[Mensaje de despedida]</p>
+<h2>Castillo Espinosa Hillary Mariana</h2>
 
-    <h2>[Nombre de la quinceañera]</h2>
-
-    <span>[Mensaje final]</span>
-
-    <button id="botonRepetir"
+<button
+    id="botonRepetir"
     class="boton-principal"
     type="button">
     Volver a ver la invitación ↻
-    </button>
+</button>
 
 </section>
 
 </main>
 
-<!-- Archivo que controla las animaciones y botones -->
+<!-- JavaScript -->
 <script src="script.js"></script>
 
 </body>
